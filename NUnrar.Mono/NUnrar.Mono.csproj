@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{51F02DE5-3A3D-4545-A309-7F4514B88A9E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NUnrar.Mono</RootNamespace>
+    <AssemblyName>NUnrar.Mono</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>Mono</TargetFrameworkProfile>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;MONO</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\</OutputPath>
+    <DefineConstants>TRACE;MONO</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\NUnrar\Archive\FileInfoRarArchiveVolume.cs">
+      <Link>Archive\FileInfoRarArchiveVolume.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Archive\FileInfoRarFilePart.cs">
+      <Link>Archive\FileInfoRarFilePart.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Archive\RarArchive.cs">
+      <Link>Archive\RarArchive.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Archive\RarArchive.Extensions.cs">
+      <Link>Archive\RarArchive.Extensions.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Archive\RarArchiveEntry.cs">
+      <Link>Archive\RarArchiveEntry.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Archive\RarArchiveEntry.Extensions.cs">
+      <Link>Archive\RarArchiveEntry.Extensions.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Archive\RarArchiveVolume.cs">
+      <Link>Archive\RarArchiveVolume.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Archive\RarArchiveVolumeFactory.cs">
+      <Link>Archive\RarArchiveVolumeFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Archive\SeekableStreamFilePart.cs">
+      <Link>Archive\SeekableStreamFilePart.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Archive\StreamRarArchiveVolume.cs">
+      <Link>Archive\StreamRarArchiveVolume.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Common\IRarExtractionListener.cs">
+      <Link>Common\IRarExtractionListener.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Common\RarEntry.cs">
+      <Link>Common\RarEntry.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Common\RarFilePart.cs">
+      <Link>Common\RarFilePart.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Common\RarOptions.cs">
+      <Link>Common\RarOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Common\RarVolume.cs">
+      <Link>Common\RarVolume.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\ConsoleRarExtractionListener.cs">
+      <Link>ConsoleRarExtractionListener.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Exceptions\InvalidRarFormatException.cs">
+      <Link>Exceptions\InvalidRarFormatException.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Exceptions\MultipartStreamRequiredException.cs">
+      <Link>Exceptions\MultipartStreamRequiredException.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Exceptions\RarException.cs">
+      <Link>Exceptions\RarException.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Exceptions\RarExtractionException.cs">
+      <Link>Exceptions\RarExtractionException.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Headers\ArchiveHeader.cs">
+      <Link>Headers\ArchiveHeader.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Headers\AVHeader.cs">
+      <Link>Headers\AVHeader.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Headers\CommentHeader.cs">
+      <Link>Headers\CommentHeader.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Headers\EndArchiveHeader.cs">
+      <Link>Headers\EndArchiveHeader.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Headers\FileHeader.cs">
+      <Link>Headers\FileHeader.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Headers\FileNameDecoder.cs">
+      <Link>Headers\FileNameDecoder.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Headers\Flags.cs">
+      <Link>Headers\Flags.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Headers\FlagUtility.cs">
+      <Link>Headers\FlagUtility.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Headers\MarkHeader.cs">
+      <Link>Headers\MarkHeader.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Headers\NewSubHeader.cs">
+      <Link>Headers\NewSubHeader.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Headers\RarHeader.cs">
+      <Link>Headers\RarHeader.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Headers\RarHeaderFactory.cs">
+      <Link>Headers\RarHeaderFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Headers\SignHeader.cs">
+      <Link>Headers\SignHeader.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\IO\MarkingBinaryReader.cs">
+      <Link>IO\MarkingBinaryReader.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\IO\MultiVolumeStream.cs">
+      <Link>IO\MultiVolumeStream.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\IO\ReadOnlySubStream.cs">
+      <Link>IO\ReadOnlySubStream.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\IO\StreamingMode.cs">
+      <Link>IO\StreamingMode.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\LazyReadOnlyCollection.cs">
+      <Link>LazyReadOnlyCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\NullRarExtractionListener.cs">
+      <Link>NullRarExtractionListener.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Reader\MultiVolumeRarReader.cs">
+      <Link>Reader\MultiVolumeRarReader.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Reader\NonSeekableStreamFilePart.cs">
+      <Link>Reader\NonSeekableStreamFilePart.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Reader\RarReader.cs">
+      <Link>Reader\RarReader.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Reader\RarReader.Extensions.cs">
+      <Link>Reader\RarReader.Extensions.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Reader\RarReaderEntry.cs">
+      <Link>Reader\RarReaderEntry.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Reader\RarReaderVolume.cs">
+      <Link>Reader\RarReaderVolume.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Reader\SingleVolumeRarReader.cs">
+      <Link>Reader\SingleVolumeRarReader.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\Decode\AudioVariables.cs">
+      <Link>Unpack\Decode\AudioVariables.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\Decode\BitDecode.cs">
+      <Link>Unpack\Decode\BitDecode.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\Decode\CodeType.cs">
+      <Link>Unpack\Decode\CodeType.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\Decode\Compress.cs">
+      <Link>Unpack\Decode\Compress.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\Decode\Decode.cs">
+      <Link>Unpack\Decode\Decode.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\Decode\DistDecode.cs">
+      <Link>Unpack\Decode\DistDecode.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\Decode\FilterType.cs">
+      <Link>Unpack\Decode\FilterType.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\Decode\LitDecode.cs">
+      <Link>Unpack\Decode\LitDecode.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\Decode\LowDistDecode.cs">
+      <Link>Unpack\Decode\LowDistDecode.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\Decode\MultDecode.cs">
+      <Link>Unpack\Decode\MultDecode.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\Decode\RepDecode.cs">
+      <Link>Unpack\Decode\RepDecode.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\PPM\BlockTypes.cs">
+      <Link>Unpack\PPM\BlockTypes.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\PPM\FreqData.cs">
+      <Link>Unpack\PPM\FreqData.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\PPM\ModelPPM.cs">
+      <Link>Unpack\PPM\ModelPPM.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\PPM\Pointer.cs">
+      <Link>Unpack\PPM\Pointer.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\PPM\PPMContext.cs">
+      <Link>Unpack\PPM\PPMContext.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\PPM\RangeCoder.cs">
+      <Link>Unpack\PPM\RangeCoder.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\PPM\RarMemBlock.cs">
+      <Link>Unpack\PPM\RarMemBlock.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\PPM\RarNode.cs">
+      <Link>Unpack\PPM\RarNode.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\PPM\SEE2Context.cs">
+      <Link>Unpack\PPM\SEE2Context.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\PPM\State.cs">
+      <Link>Unpack\PPM\State.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\PPM\StateRef.cs">
+      <Link>Unpack\PPM\StateRef.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\PPM\SubAllocator.cs">
+      <Link>Unpack\PPM\SubAllocator.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\RarCRC.cs">
+      <Link>Unpack\RarCRC.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\Unpack.cs">
+      <Link>Unpack\Unpack.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\Unpack15.cs">
+      <Link>Unpack\Unpack15.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\Unpack20.cs">
+      <Link>Unpack\Unpack20.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\UnpackFilter.cs">
+      <Link>Unpack\UnpackFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\UnpackUtility.cs">
+      <Link>Unpack\UnpackUtility.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\VM\BitInput.cs">
+      <Link>Unpack\VM\BitInput.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\VM\RarVM.cs">
+      <Link>Unpack\VM\RarVM.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\VM\VMCmdFlags.cs">
+      <Link>Unpack\VM\VMCmdFlags.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\VM\VMCommands.cs">
+      <Link>Unpack\VM\VMCommands.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\VM\VMFlags.cs">
+      <Link>Unpack\VM\VMFlags.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\VM\VMOpType.cs">
+      <Link>Unpack\VM\VMOpType.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\VM\VMPreparedCommand.cs">
+      <Link>Unpack\VM\VMPreparedCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\VM\VMPreparedOperand.cs">
+      <Link>Unpack\VM\VMPreparedOperand.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\VM\VMPreparedProgram.cs">
+      <Link>Unpack\VM\VMPreparedProgram.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\VM\VMStandardFilters.cs">
+      <Link>Unpack\VM\VMStandardFilters.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Unpack\VM\VMStandardFilterSignature.cs">
+      <Link>Unpack\VM\VMStandardFilterSignature.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\Utility.cs">
+      <Link>Utility.cs</Link>
+    </Compile>
+    <Compile Include="..\NUnrar\VersionInfo.cs">
+      <Link>VersionInfo.cs</Link>
+    </Compile>
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
