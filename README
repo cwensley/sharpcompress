@@ -1,5 +1,5 @@
 sharpcompress a compression library for .NET/Mono that can unrar and zip/unzip (soon others)
 
-The major feature is support for non-seekable streams so large files can be processed on the fly (i.e. download stream)
+The major feature is support for non-seekable streams so large files can be processed on the fly (i.e. download stream).  Organization of the library should be akin to Apache Commons Compress (http://commons.apache.org/compress/)
 
 This is a fork of my work from NUnrar (http://nunrar.codeplex.com) to keep nunrar rar-focused.
