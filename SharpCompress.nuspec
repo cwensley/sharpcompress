@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<package> 
+  <metadata> 
+    <id>nunrar</id> 
+    <version>0.8.1</version> 
+    <authors>Adam Hathcock</authors>
+    <description>NUnrar for extracting rar files in .NET with forward-only reading and file random access APIs.</description> 
+    <language>en-US</language>
+    <licenseUrl>http://nunrar.codeplex.com/license</licenseUrl>
+    <projectUrl>http://nunrar.codeplex.com/</projectUrl>
+  </metadata>
+  <files>
+    <file src="bin\NUnrar.dll" target="lib\Net40" />
+	<file src="bin\NUnrar.Silverlight.dll" target="lib\SL4" />
+  </files>
+</package>

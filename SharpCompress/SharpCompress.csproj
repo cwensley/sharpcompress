@@ -83,8 +83,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Archive\RarArchiveVolume.cs" />
-    <Compile Include="Archive\StreamRarArchiveVolume.cs" />
+    <Compile Include="Rar\RarArchiveVolume.cs" />
+    <Compile Include="Rar\StreamRarArchiveVolume.cs" />
     <Compile Include="Common\ExtractOptions.cs" />
     <Compile Include="Common\FilePart.cs" />
     <Compile Include="Common\Entry.cs" />
@@ -101,21 +101,21 @@
     <Compile Include="Exceptions\MultipartStreamRequiredException.cs" />
     <Compile Include="LazyReadOnlyCollection.cs" />
     <Compile Include="NullExtractionListener.cs" />
-    <Compile Include="Archive\RarArchive.Extensions.cs" />
-    <Compile Include="Archive\RarArchiveEntry.Extensions.cs" />
-    <Compile Include="Archive\RarArchiveEntry.cs" />
+    <Compile Include="Rar\RarArchive.Extensions.cs" />
+    <Compile Include="Rar\RarArchiveEntry.Extensions.cs" />
+    <Compile Include="Rar\RarArchiveEntry.cs" />
     <Compile Include="Exceptions\RarExtractionException.cs" />
     <Compile Include="Rar\RarEntry.cs" />
     <Compile Include="Common\ReaderOptions.cs" />
-    <Compile Include="Reader\MultiVolumeRarReader.cs" />
-    <Compile Include="Reader\RarReader.cs" />
-    <Compile Include="Reader\RarReader.Extensions.cs" />
-    <Compile Include="Reader\RarReaderEntry.cs" />
-    <Compile Include="Archive\SeekableStreamFilePart.cs" />
-    <Compile Include="Reader\SingleVolumeRarReader.cs" />
+    <Compile Include="Rar\MultiVolumeRarReader.cs" />
+    <Compile Include="Rar\RarReader.cs" />
+    <Compile Include="Rar\RarReader.Extensions.cs" />
+    <Compile Include="Rar\RarReaderEntry.cs" />
+    <Compile Include="Rar\SeekableStreamFilePart.cs" />
+    <Compile Include="Rar\SingleVolumeRarReader.cs" />
     <Compile Include="VersionInfo.cs" />
-    <Compile Include="Archive\FileInfoRarFilePart.cs" />
-    <Compile Include="Archive\FileInfoRarArchiveVolume.cs" />
+    <Compile Include="Rar\FileInfoRarFilePart.cs" />
+    <Compile Include="Rar\FileInfoRarArchiveVolume.cs" />
     <Compile Include="Rar\RarFilePart.cs" />
     <Compile Include="Rar\Headers\AVHeader.cs" />
     <Compile Include="Rar\Headers\CommentHeader.cs" />
@@ -123,7 +123,7 @@
     <Compile Include="Rar\Headers\SignHeader.cs" />
     <Compile Include="Rar\RarVolume.cs" />
     <Compile Include="Rar\Unpack\UnpackUtility.cs" />
-    <Compile Include="Archive\RarArchive.cs" />
+    <Compile Include="Rar\RarArchive.cs" />
     <Compile Include="Rar\MultiVolumeStream.cs" />
     <Compile Include="Rar\Unpack\RarCRC.cs" />
     <Compile Include="Rar\Headers\FileHeader.cs" />
@@ -174,9 +174,9 @@
     <Compile Include="Rar\Unpack\VM\VMStandardFilterSignature.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="Rar\Headers\MarkHeader.cs" />
-    <Compile Include="Archive\RarArchiveVolumeFactory.cs" />
-    <Compile Include="Reader\NonSeekableStreamFilePart.cs" />
-    <Compile Include="Reader\RarReaderVolume.cs" />
+    <Compile Include="Rar\RarArchiveVolumeFactory.cs" />
+    <Compile Include="Rar\NonSeekableStreamFilePart.cs" />
+    <Compile Include="Rar\RarReaderVolume.cs" />
     <Compile Include="Zip\CompressionMethod.cs" />
     <Compile Include="Zip\DirectoryEndHeader.cs" />
     <Compile Include="Zip\DirectoryEntryHeader.cs" />
