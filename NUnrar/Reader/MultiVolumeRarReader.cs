@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using NUnrar.Common;
-using NUnrar.Rar;
+using SharpCompress.Common;
+using SharpCompress.Rar;
 
-namespace NUnrar.Reader
+namespace SharpCompress.Reader
 {
     internal class MultiVolumeRarReader : RarReader
     {

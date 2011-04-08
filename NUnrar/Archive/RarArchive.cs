@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using NUnrar.Common;
-using NUnrar.Headers;
-using NUnrar.IO;
+using SharpCompress.Common;
+using SharpCompress.Headers;
+using SharpCompress.IO;
 
-namespace NUnrar.Archive
+namespace SharpCompress.Archive
 {
     public class RarArchive
     {

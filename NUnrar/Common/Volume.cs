@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace NUnrar.Common
+namespace SharpCompress.Common
 {
     public abstract class Volume
     {

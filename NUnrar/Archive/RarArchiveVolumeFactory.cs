@@ -4,11 +4,11 @@ using System.IO;
 #if !PORTABLE
 using System.Linq;
 using System.Text;
-using NUnrar.Headers;
+using SharpCompress.Headers;
 #endif
-using NUnrar.Common;
+using SharpCompress.Common;
 
-namespace NUnrar.Archive
+namespace SharpCompress.Archive
 {
     internal static class RarArchiveVolumeFactory
     {

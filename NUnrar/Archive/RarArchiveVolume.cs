@@ -1,9 +1,9 @@
 ﻿using System.IO;
-using NUnrar.Common;
-using NUnrar.IO;
-using NUnrar.Rar;
+using SharpCompress.Common;
+using SharpCompress.IO;
+using SharpCompress.Rar;
 
-namespace NUnrar.Archive
+namespace SharpCompress.Archive
 {
     public abstract class RarArchiveVolume : RarVolume
     {

@@ -1,8 +1,8 @@
 ﻿using System.IO;
-using NUnrar.Headers;
-using NUnrar.Rar;
+using SharpCompress.Headers;
+using SharpCompress.Rar;
 
-namespace NUnrar.Archive
+namespace SharpCompress.Archive
 {
     internal class FileInfoRarFilePart : RarFilePart
     {

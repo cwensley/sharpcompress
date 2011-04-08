@@ -16,9 +16,9 @@
 * "@":  "&#064;" 
 */
 
-using NUnrar.Rar.Unpack.decode;
+using SharpCompress.Rar.Unpack.decode;
 
-namespace NUnrar.Rar.Unpack
+namespace SharpCompress.Rar.Unpack
 {
 
     /// <summary> DOCUMENT ME

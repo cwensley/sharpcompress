@@ -1,6 +1,6 @@
-using NUnrar.Rar.Unpack.VM;
+using SharpCompress.Rar.Unpack.VM;
 
-namespace NUnrar.Rar.Unpack
+namespace SharpCompress.Rar.Unpack
 {
     internal class UnpackFilter
     {

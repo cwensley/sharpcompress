@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using NUnrar.Common;
-using NUnrar.Rar;
+using SharpCompress.Common;
+using SharpCompress.Rar;
 
-namespace NUnrar.Reader
+namespace SharpCompress.Reader
 {
     internal class SingleVolumeRarReader : RarReader
     {

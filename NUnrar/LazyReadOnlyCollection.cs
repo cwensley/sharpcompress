@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NUnrar
+namespace SharpCompress
 {
     internal class LazyReadOnlyCollection<T> : ICollection<T>
     {

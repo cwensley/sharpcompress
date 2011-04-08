@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using NUnrar.Common;
-using NUnrar.Headers;
-using NUnrar.IO;
-using NUnrar.Rar;
+using SharpCompress.Common;
+using SharpCompress.Headers;
+using SharpCompress.IO;
+using SharpCompress.Rar;
 
-namespace NUnrar.Archive
+namespace SharpCompress.Archive
 {
     /// <summary>
     /// A rar part based on a FileInfo object

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NUnrar.Headers
+namespace SharpCompress.Headers
 {
     internal class NewSubHeaderType : IEquatable<NewSubHeaderType>
     {

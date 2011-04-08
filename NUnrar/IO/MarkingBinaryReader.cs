@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace NUnrar.IO
+namespace SharpCompress.IO
 {
     internal class MarkingBinaryReader : BinaryReader
     {

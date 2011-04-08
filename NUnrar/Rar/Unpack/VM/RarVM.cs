@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace NUnrar.Rar.Unpack.VM
+namespace SharpCompress.Rar.Unpack.VM
 {
     internal class RarVM : BitInput
     {

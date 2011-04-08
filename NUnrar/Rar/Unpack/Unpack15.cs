@@ -17,10 +17,10 @@
 */
 using System;
 using System.IO;
-using NUnrar.Rar.Unpack.decode;
-using NUnrar.Rar.Unpack.VM;
+using SharpCompress.Rar.Unpack.decode;
+using SharpCompress.Rar.Unpack.VM;
 
-namespace NUnrar.Rar.Unpack
+namespace SharpCompress.Rar.Unpack
 {
 
     /// <summary> DOCUMENT ME

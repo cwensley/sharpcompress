@@ -1,8 +1,8 @@
 ﻿using System.IO;
 using System.Text;
-using NUnrar.IO;
+using SharpCompress.IO;
 
-namespace NUnrar.Zip
+namespace SharpCompress.Zip
 {
     public class LocalEntryHeader : ZipHeader
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NUnrar
+namespace SharpCompress
 {
     public class InvalidRarFormatException : RarException
     {

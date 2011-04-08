@@ -1,9 +1,9 @@
 using System;
 using System.IO;
 using System.Text;
-using NUnrar.IO;
+using SharpCompress.IO;
 
-namespace NUnrar.Headers
+namespace SharpCompress.Headers
 {
     internal class FileHeader : RarHeader
     {

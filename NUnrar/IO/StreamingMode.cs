@@ -1,5 +1,5 @@
 ﻿
-namespace NUnrar.IO
+namespace SharpCompress.IO
 {
     internal enum StreamingMode
     {

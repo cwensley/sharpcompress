@@ -1,5 +1,5 @@
 
-namespace NUnrar.Rar.Unpack.decode
+namespace SharpCompress.Rar.Unpack.decode
 {
     internal class Compress
     {

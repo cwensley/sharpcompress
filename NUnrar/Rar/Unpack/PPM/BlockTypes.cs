@@ -1,5 +1,5 @@
 
-namespace NUnrar.Rar.Unpack.PPM
+namespace SharpCompress.Rar.Unpack.PPM
 {
     internal enum BlockTypes
     {

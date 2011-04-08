@@ -1,10 +1,10 @@
 ﻿using System.IO;
-using NUnrar.Common;
+using SharpCompress.Common;
 #if THREEFIVE
-using NUnrar.Headers;
+using SharpCompress.Headers;
 #endif
 
-namespace NUnrar.Reader
+namespace SharpCompress.Reader
 {
     public static class RarReaderExtensions
     {

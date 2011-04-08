@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using NUnrar.Headers;
-using NUnrar.Rar.Unpack.decode;
-using NUnrar.Rar.Unpack.PPM;
-using NUnrar.Rar.Unpack.VM;
+using SharpCompress.Headers;
+using SharpCompress.Rar.Unpack.decode;
+using SharpCompress.Rar.Unpack.PPM;
+using SharpCompress.Rar.Unpack.VM;
 
-namespace NUnrar.Rar.Unpack
+namespace SharpCompress.Rar.Unpack
 {
     internal sealed class Unpack : Unpack20
     {

@@ -1,19 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using NUnrar.Common;
+using SharpCompress.Common;
 #if PORTABLE || THREEFIVE
-using NUnrar.Headers;
+using SharpCompress.Headers;
 #endif
-using NUnrar.Rar;
-using NUnrar.Rar.Unpack;
+using SharpCompress.Rar;
+using SharpCompress.Rar.Unpack;
 
-namespace NUnrar.Reader
+namespace SharpCompress.Reader
 {
     /// <summary>
     /// This class faciliates Reading a Rar Archive in a non-seekable forward-only manner
     /// </summary>
-    public abstract class RarReader : NUnrar.Common.CompressedStreamReader
+    public abstract class RarReader : SharpCompress.Common.CompressedStreamReader
     {
         private RarVolume volume;
 

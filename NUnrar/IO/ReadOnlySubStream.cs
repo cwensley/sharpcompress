@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace NUnrar.IO
+namespace SharpCompress.IO
 {
     internal class ReadOnlySubStream : Stream
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NUnrar.Common
+namespace SharpCompress.Common
 {
     [Flags]
     public enum ExtractOptions

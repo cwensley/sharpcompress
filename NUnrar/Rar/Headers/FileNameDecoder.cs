@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace NUnrar.Headers
+namespace SharpCompress.Headers
 {
     /// <summary>
     /// This is for the crazy Rar encoding that I don't understand

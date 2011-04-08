@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NUnrar.Common
+namespace SharpCompress.Common
 {
     public abstract class Entry
     {

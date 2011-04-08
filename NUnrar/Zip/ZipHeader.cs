@@ -1,6 +1,6 @@
-﻿using NUnrar.IO;
+﻿using SharpCompress.IO;
 
-namespace NUnrar.Zip
+namespace SharpCompress.Zip
 {
     public abstract class ZipHeader
     {

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using NUnrar.Common;
-using NUnrar.Headers;
-using NUnrar.IO;
-using NUnrar.Rar;
+using SharpCompress.Common;
+using SharpCompress.Headers;
+using SharpCompress.IO;
+using SharpCompress.Rar;
 
-namespace NUnrar.Reader
+namespace SharpCompress.Reader
 {
     public class RarReaderVolume : RarVolume
     {

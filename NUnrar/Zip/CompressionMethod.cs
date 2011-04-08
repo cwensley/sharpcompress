@@ -1,5 +1,5 @@
 ﻿
-namespace NUnrar.Zip
+namespace SharpCompress.Zip
 {
     public enum CompressionMethod
     {

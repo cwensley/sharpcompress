@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using NUnrar.Common;
-using NUnrar.Headers;
-using NUnrar.IO;
+using SharpCompress.Common;
+using SharpCompress.Headers;
+using SharpCompress.IO;
 
-namespace NUnrar.Rar
+namespace SharpCompress.Rar
 {
     /// <summary>
     /// A RarArchiveVolume is a single rar file that may or may not be a split RarArchive.  A Rar Archive is one to many Rar Parts
@@ -99,7 +99,7 @@ namespace NUnrar.Rar
 
         /// <summary>
         /// RarArchive is SOLID (this means the Archive saved bytes by reusing information which helps for archives containing many small files).
-        /// Currently, NUnrar cannot decompress SOLID archives.
+        /// Currently, SharpCompress cannot decompress SOLID archives.
         /// </summary>
         public bool IsSolidArchive
         {

@@ -1,7 +1,7 @@
 ﻿using System;
-using NUnrar.Common;
+using SharpCompress.Common;
 
-namespace NUnrar
+namespace SharpCompress
 {
     public class ConsoleExtractionListener : IExtractionListener
     {

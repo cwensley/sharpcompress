@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using NUnrar.Common;
-using NUnrar.Headers;
+using SharpCompress.Common;
+using SharpCompress.Headers;
 
-namespace NUnrar.Rar
+namespace SharpCompress.Rar
 {
     internal class MultiVolumeStream : Stream
     {

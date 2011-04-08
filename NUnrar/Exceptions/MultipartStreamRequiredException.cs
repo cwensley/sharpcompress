@@ -1,5 +1,5 @@
 ﻿
-namespace NUnrar
+namespace SharpCompress
 {
     public class MultipartStreamRequiredException : RarException
     {

@@ -1,8 +1,8 @@
 ﻿using System.IO;
 using System.IO.Compression;
-using NUnrar.Common;
+using SharpCompress.Common;
 
-namespace NUnrar.Zip
+namespace SharpCompress.Zip
 {
     public class ZipFilePart : FilePart
     {

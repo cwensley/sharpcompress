@@ -1,5 +1,5 @@
 ﻿
-namespace NUnrar.Common
+namespace SharpCompress.Common
 {
     public interface IExtractionListener
     {

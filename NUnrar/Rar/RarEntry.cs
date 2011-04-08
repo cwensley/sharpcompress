@@ -1,7 +1,7 @@
 ﻿using System;
-using NUnrar.Headers;
+using SharpCompress.Headers;
 
-namespace NUnrar.Common
+namespace SharpCompress.Common
 {
     public abstract class RarEntry : Entry
     {

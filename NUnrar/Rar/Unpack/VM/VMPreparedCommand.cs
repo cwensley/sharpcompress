@@ -1,5 +1,5 @@
 
-namespace NUnrar.Rar.Unpack.VM
+namespace SharpCompress.Rar.Unpack.VM
 {
     internal class VMPreparedCommand
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NUnrar
+namespace SharpCompress
 {
 #if SILVERLIGHT || PORTABLE
     public class RarException : Exception

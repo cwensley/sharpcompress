@@ -1,5 +1,5 @@
 using System.Text;
-namespace NUnrar.Rar.Unpack.PPM
+namespace SharpCompress.Rar.Unpack.PPM
 {
     internal class PPMContext : Pointer
     {
@@ -40,7 +40,7 @@ namespace NUnrar.Rar.Unpack.PPM
         }
 
         //UPGRADE_NOTE: Final was removed from the declaration of 'unionSize '. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1003'"
-        //UPGRADE_NOTE: The initialization of  'unionSize' was moved to static method 'NUnrar.Unpack.PPM.PPMContext'. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1005'"
+        //UPGRADE_NOTE: The initialization of  'unionSize' was moved to static method 'SharpCompress.Unpack.PPM.PPMContext'. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1005'"
         private static readonly int unionSize;
 
         //UPGRADE_NOTE: Final was removed from the declaration of 'size '. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1003'"

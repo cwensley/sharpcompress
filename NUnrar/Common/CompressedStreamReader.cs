@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace NUnrar.Common
+namespace SharpCompress.Common
 {
     /// <summary>
     /// A generic push reader that reads unseekable comrpessed streams.

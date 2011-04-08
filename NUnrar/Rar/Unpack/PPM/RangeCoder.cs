@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace NUnrar.Rar.Unpack.PPM
+namespace SharpCompress.Rar.Unpack.PPM
 {
     internal class RangeCoder
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace NUnrar.Rar.Unpack
+namespace SharpCompress.Rar.Unpack
 {
     internal static class RarCRC
     {

@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using NUnrar.Common;
-using NUnrar.Headers;
-using NUnrar.Rar;
-using NUnrar.Rar.Unpack;
+using SharpCompress.Common;
+using SharpCompress.Headers;
+using SharpCompress.Rar;
+using SharpCompress.Rar.Unpack;
 
-namespace NUnrar.Archive
+namespace SharpCompress.Archive
 {
     public class RarArchiveEntry : RarEntry
     {

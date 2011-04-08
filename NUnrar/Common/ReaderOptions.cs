@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NUnrar.Common
+namespace SharpCompress.Common
 {
     [Flags]
     public enum ReaderOptions
@@ -10,7 +10,7 @@ namespace NUnrar.Common
         /// </summary>
         None = 0,
         /// <summary>
-        /// NUnrar will keep the supplied streams open
+        /// SharpCompress will keep the supplied streams open
         /// </summary>
         KeepStreamsOpen = 1,
         /// <summary>

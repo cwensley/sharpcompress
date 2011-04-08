@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using NUnrar.Common;
+using SharpCompress.Common;
 
-namespace NUnrar.Zip
+namespace SharpCompress.Zip
 {
-    public class ZipReader : NUnrar.Common.CompressedStreamReader
+    public class ZipReader : SharpCompress.Common.CompressedStreamReader
     {
         private readonly Stream stream;
 

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using NUnrar.IO;
+using SharpCompress.IO;
 
-namespace NUnrar.Zip
+namespace SharpCompress.Zip
 {
     public static class ZipHeaderFactory
     {

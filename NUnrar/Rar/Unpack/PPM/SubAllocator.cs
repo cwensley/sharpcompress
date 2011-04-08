@@ -1,6 +1,6 @@
 using System;
 using System.Text;
-namespace NUnrar.Rar.Unpack.PPM
+namespace SharpCompress.Rar.Unpack.PPM
 {
     internal class SubAllocator
     {
@@ -69,7 +69,7 @@ namespace NUnrar.Rar.Unpack.PPM
         public static readonly int N_INDEXES = N1 + N2 + N3 + N4;
 
         //UPGRADE_NOTE: Final was removed from the declaration of 'UNIT_SIZE '. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1003'"
-        //UPGRADE_NOTE: The initialization of  'UNIT_SIZE' was moved to static method 'NUnrar.Unpack.PPM.SubAllocator'. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1005'"
+        //UPGRADE_NOTE: The initialization of  'UNIT_SIZE' was moved to static method 'SharpCompress.Unpack.PPM.SubAllocator'. "ms-help://MS.VSCC.v80/dv_commoner/local/redirect.htm?index='!DefaultContextWindowIndex'&keyword='jlca1005'"
         public static readonly int UNIT_SIZE;
 
         public const int FIXED_UNIT_SIZE = 12;

@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using NUnrar.Common;
-using NUnrar.IO;
+using SharpCompress.Common;
+using SharpCompress.IO;
 
-namespace NUnrar.Headers
+namespace SharpCompress.Headers
 {
     internal class RarHeaderFactory
     {

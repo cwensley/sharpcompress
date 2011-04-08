@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace NUnrar.Archive
+namespace SharpCompress.Archive
 {
     public static class RarArchiveExtensions
     {
@@ -22,7 +22,7 @@ namespace NUnrar.Archive
 
         /// <summary>
         /// RarArchive is SOLID (this means the Archive saved bytes by reusing information which helps for archives containing many small files).
-        /// Currently, NUnrar cannot decompress SOLID archives.
+        /// Currently, SharpCompress cannot decompress SOLID archives.
         /// </summary>
         public static bool IsSolidArchive(this RarArchive archive)
         {
