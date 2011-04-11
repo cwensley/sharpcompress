@@ -21,7 +21,11 @@ namespace SharpCompress.Common
             listener.CheckNotNull("listener");
         }
 
-        protected IExtractionListener Listener { get; private set; }
+        protected IExtractionListener Listener
+        {
+            get;
+            private set;
+        }
 
         public void Dispose()
         {
@@ -38,7 +42,10 @@ namespace SharpCompress.Common
         /// <summary>
         /// Current volume that the current entry resides in
         /// </summary>
-        public abstract Volume Volume { get; }
+        public abstract Volume Volume
+        {
+            get;
+        }
 
         /// <summary>
         /// Current file entry 
@@ -71,7 +78,7 @@ namespace SharpCompress.Common
                 SkipEntry();
             }
             wroteCurrentEntry = false;
-            if (entriesForCurrentReadStream.MoveNext())
+            if (NextEntryForCurrentStream())
             {
                 return true;
             }
@@ -99,6 +106,11 @@ namespace SharpCompress.Common
         }
         internal abstract IEnumerable<FilePart> CreateFilePartEnumerableForCurrentEntry();
         internal abstract Stream RequestInitialStream();
+
+        internal virtual bool NextEntryForCurrentStream()
+        {
+            return entriesForCurrentReadStream.MoveNext();
+        }
 
         #region Entry Skip/Write
 

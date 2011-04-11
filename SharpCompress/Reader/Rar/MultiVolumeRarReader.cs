@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using SharpCompress.Common;
-using SharpCompress.Rar;
 using SharpCompress.Common.Rar;
 
 namespace SharpCompress.Reader.Rar
@@ -11,6 +9,7 @@ namespace SharpCompress.Reader.Rar
     internal class MultiVolumeRarReader : RarReader
     {
         private readonly IEnumerator<Stream> streams;
+        private Stream tempStream;
 
         internal MultiVolumeRarReader(IEnumerable<Stream> streams, ReaderOptions options, IExtractionListener listener)
             : base(options, listener)
@@ -31,21 +30,39 @@ namespace SharpCompress.Reader.Rar
             throw new RarExtractionException("No stream provided when requested by MultiVolumeRarReader");
         }
 
+        internal override bool NextEntryForCurrentStream()
+        {
+            if (!base.NextEntryForCurrentStream())
+            {
+                if (streams.MoveNext())
+                {
+                    tempStream = streams.Current;
+                    return true;
+                }
+                return false;
+            }
+            return true;
+        }
+
         internal override IEnumerable<FilePart> CreateFilePartEnumerableForCurrentEntry()
         {
-            return new MultiVolumeStreamEnumerator(this, streams);
+            var enumerator = new MultiVolumeStreamEnumerator(this, streams, tempStream);
+            tempStream = null;
+            return enumerator;
         }
 
         private class MultiVolumeStreamEnumerator : IEnumerable<FilePart>, IEnumerator<FilePart>
         {
             private readonly MultiVolumeRarReader reader;
             private readonly IEnumerator<Stream> nextReadableStreams;
+            private Stream tempStream;
             private bool isFirst = true;
 
-            internal MultiVolumeStreamEnumerator(MultiVolumeRarReader r, IEnumerator<Stream> nextReadableStreams)
+            internal MultiVolumeStreamEnumerator(MultiVolumeRarReader r, IEnumerator<Stream> nextReadableStreams, Stream tempStream)
             {
                 reader = r;
                 this.nextReadableStreams = nextReadableStreams;
+                this.tempStream = tempStream;
             }
 
             public IEnumerator<FilePart> GetEnumerator()
@@ -55,7 +72,7 @@ namespace SharpCompress.Reader.Rar
 
             System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
             {
-                throw new NotImplementedException();
+                return this;
             }
 
             public FilePart Current
@@ -72,7 +89,7 @@ namespace SharpCompress.Reader.Rar
             {
                 get
                 {
-                    throw new NotImplementedException();
+                    return Current;
                 }
             }
 
@@ -89,11 +106,19 @@ namespace SharpCompress.Reader.Rar
                 {
                     return false;
                 }
-                if (!nextReadableStreams.MoveNext())
+                if (tempStream != null)
+                {
+                    reader.LoadStreamForReading(tempStream);
+                    tempStream = null;
+                }
+                else if (!nextReadableStreams.MoveNext())
                 {
                     throw new RarExtractionException("No stream provided when requested by MultiVolumeRarReader");
                 }
-                reader.LoadStreamForReading(nextReadableStreams.Current);
+                else
+                {
+                    reader.LoadStreamForReading(nextReadableStreams.Current);
+                }
 
                 Current = reader.Entry.Parts.First();
                 return true;

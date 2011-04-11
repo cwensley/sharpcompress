@@ -1,11 +1,9 @@
 
-/NUnrar/obj
 /bin
-/NUnrar.Mono/obj
-/NUnrar.Silverlight/obj
-/NUnrar.3.5/obj
 *.suo
 /SharpCompress/obj
 /SharpCompress.Silverlight/obj
 /SharpCompress.Mono/obj
 /SharpCompress.3.5/obj
+/SharpCompress.Test/obj
+/SharpCompress.Test/bin

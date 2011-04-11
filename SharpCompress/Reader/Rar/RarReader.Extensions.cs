@@ -36,7 +36,7 @@ namespace SharpCompress.Reader.Rar
 
             if (options.HasFlag(ExtractOptions.ExtractFullPath))
             {
-                string folder = Path.GetDirectoryName(file);
+                string folder = Path.GetDirectoryName(reader.Entry.FilePath);
                 string destdir = Path.Combine(destinationDirectory, folder);
                 if (!Directory.Exists(destdir))
                 {
