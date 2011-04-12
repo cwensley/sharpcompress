@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using SharpCompress.IO;
 using SharpCompress.Common.Zip.Headers;
+using SharpCompress.IO;
 
 namespace SharpCompress.Common.Zip
 {
@@ -63,9 +63,8 @@ namespace SharpCompress.Common.Zip
                             }
                     }
                 }
-                catch (Exception e)
+                catch
                 {
-                    Console.WriteLine(e);
                     header = null;
                 }
                 yield return header;

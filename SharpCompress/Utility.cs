@@ -356,5 +356,15 @@ namespace SharpCompress
         {
             return DosDateToDateTime((UInt32)iTime);
         }
+
+        public static void TransferTo(this Stream source, Stream destination)
+        {
+            byte[] array = new byte[4096];
+            int count;
+            while ((count = source.Read(array, 0, array.Length)) != 0)
+            {
+                destination.Write(array, 0, count);
+            }
+        }
     }
 }

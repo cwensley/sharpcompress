@@ -1,4 +1,4 @@
 ﻿using System.Reflection;
 
-[assembly: AssemblyTitle("NUnrar.3.5")]
-[assembly: AssemblyProduct("NUnrar.3.5")]
+[assembly: AssemblyTitle("SharpCompress.3.5")]
+[assembly: AssemblyProduct("SharpCompress.3.5")]

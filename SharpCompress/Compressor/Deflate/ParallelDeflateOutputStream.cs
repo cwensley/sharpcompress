@@ -16,6 +16,7 @@
 //
 // ------------------------------------------------------------------
 
+#if !PORTABLE
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -49,7 +50,7 @@ namespace SharpCompress.Compressor.Deflate
             compressor.InputBuffer = buffer;
         }
 
-        #region Nested type: Status
+#region Nested type: Status
 
         internal enum Status
         {
@@ -62,7 +63,7 @@ namespace SharpCompress.Compressor.Deflate
             Done = 6
         }
 
-        #endregion
+#endregion
     }
 
     /// <summary>
@@ -690,11 +691,26 @@ namespace SharpCompress.Compressor.Deflate
         /// You must call Close on the stream to guarantee that all of the data written in has
         /// been compressed, and the compressed data has been written out.
         /// </remarks>
-        public override void Close()
+        protected override void Dispose(bool disposing)
         {
-            TraceOutput(TraceBits.Session, "Close {0:X8}", GetHashCode());
+            base.Dispose(disposing);
+            if (!disposing)
+            {
+                return;
+            }
 
-            if (_isClosed) return;
+
+            TraceOutput(TraceBits.Lifecycle, "Dispose  {0:X8}", GetHashCode());
+            _isDisposed = true;
+            _pool = null;
+            TraceOutput(TraceBits.Synch, "Synch    _sessionReset.Set()  Dispose");
+            _sessionReset.Set(); // tell writer to die
+
+            _writingDone.Close();
+            _sessionReset.Close();
+
+            if (_isClosed)
+                return;
 
             _Flush(true);
 
@@ -734,38 +750,6 @@ namespace SharpCompress.Compressor.Deflate
 
         // workitem 10030 - implement a new Dispose method
 
-        /// <summary>Dispose the object</summary>
-        /// <remarks>
-        ///   <para>
-        ///     Because ParallelDeflateOutputStream is IDisposable, the
-        ///     application must call this method when finished using the instance.
-        ///   </para>
-        ///   <para>
-        ///     This method is generally called implicitly upon exit from
-        ///     a <c>using</c> scope in C# (<c>Using</c> in VB).
-        ///   </para>
-        /// </remarks>
-        public new void Dispose()
-        {
-            TraceOutput(TraceBits.Lifecycle, "Dispose  {0:X8}", GetHashCode());
-            _isDisposed = true;
-            _pool = null;
-            TraceOutput(TraceBits.Synch, "Synch    _sessionReset.Set()  Dispose");
-            _sessionReset.Set(); // tell writer to die
-            Dispose(true);
-        }
-
-
-        /// <summary>The Dispose method</summary>
-        protected override void Dispose(bool disposeManagedResources)
-        {
-            if (disposeManagedResources)
-            {
-                // dispose managed resources
-                _writingDone.Close();
-                _sessionReset.Close();
-            }
-        }
 
 
         /// <summary>
@@ -1130,7 +1114,7 @@ namespace SharpCompress.Compressor.Deflate
             throw new NotImplementedException();
         }
 
-        #region Nested type: TraceBits
+#region Nested type: TraceBits
 
         [Flags]
         private enum TraceBits
@@ -1149,6 +1133,7 @@ namespace SharpCompress.Compressor.Deflate
             WriterThread = 1024, // writer thread
         }
 
-        #endregion
+#endregion
     }
 }
+#endif

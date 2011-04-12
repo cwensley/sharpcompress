@@ -79,7 +79,7 @@ namespace SharpCompress.Reader.Zip
 
         internal override System.Collections.Generic.IEnumerable<FilePart> Parts
         {
-            get { return this.filePart.AsEnumerable(); }
+            get { return this.filePart.AsEnumerable<FilePart>(); }
         }
     }
 }

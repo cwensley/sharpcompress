@@ -181,15 +181,6 @@ namespace SharpCompress.Compressor.Deflate
             set { throw new NotImplementedException(); }
         }
 
-        #region IDisposable Members
-
-        void IDisposable.Dispose()
-        {
-            Close();
-        }
-
-        #endregion
-
         /// <summary>
         /// Read from the stream
         /// </summary>
@@ -260,15 +251,16 @@ namespace SharpCompress.Compressor.Deflate
             throw new NotImplementedException();
         }
 
-
-        /// <summary>
-        /// Closes the stream.
-        /// </summary>
-        public override void Close()
+        protected override void Dispose(bool disposing)
         {
-            base.Close();
-            if (!_leaveOpen)
-                _innerStream.Close();
+            base.Dispose(disposing);
+            if (disposing)
+            {
+                if (!_leaveOpen)
+                {
+                    _innerStream.Dispose();
+                }
+            }
         }
     }
 }

@@ -27,7 +27,7 @@ namespace SharpCompress.Common.Zip.Headers
             ushort extraLength = reader.ReadUInt16();
             byte[] name = reader.ReadBytes(nameLength);
             Extra = reader.ReadBytes(extraLength);
-            Name = DefaultEncoding.GetString(name);
+            Name = DefaultEncoding.GetString(name, 0, name.Length);
         }
 
         internal ushort Version { get; private set; }

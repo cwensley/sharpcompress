@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using SharpCompress.Common;
-using SharpCompress.Common.Rar.Headers;
-using SharpCompress.Rar;
 using SharpCompress.Common.Rar;
+using SharpCompress.Common.Rar.Headers;
 
 namespace SharpCompress.Rar
 {
@@ -20,7 +19,7 @@ namespace SharpCompress.Rar
 
         internal override IEnumerable<FilePart> Parts
         {
-            get { return Part.AsEnumerable(); }
+            get { return Part.AsEnumerable<FilePart>(); }
         }
 
         internal override FileHeader FileHeader

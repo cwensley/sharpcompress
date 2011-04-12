@@ -467,7 +467,7 @@ namespace SharpCompress.Compressor.Deflate
                 if (!_disposed)
                 {
                     if (disposing && (_baseStream != null))
-                        _baseStream.Close();
+                        _baseStream.Dispose();
                     _disposed = true;
                 }
             }

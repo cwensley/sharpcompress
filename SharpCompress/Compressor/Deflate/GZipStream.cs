@@ -612,7 +612,7 @@ namespace SharpCompress.Compressor.Deflate
                 {
                     if (disposing && (_baseStream != null))
                     {
-                        _baseStream.Close();
+                        _baseStream.Dispose();
                         _Crc32 = _baseStream.Crc32;
                     }
                     _disposed = true;
@@ -812,12 +812,14 @@ namespace SharpCompress.Compressor.Deflate
                     _FileName = _FileName.Replace("/", "\\");
                 }
                 if (_FileName.EndsWith("\\"))
-                    throw new Exception("Illegal filename");
+                    throw new InvalidOperationException("Illegal filename");
+#if !PORTABLE
                 if (_FileName.IndexOf("\\") != -1)
                 {
                     // trim any leading path
                     _FileName = Path.GetFileName(_FileName);
                 }
+#endif
             }
         }
 

@@ -3,6 +3,7 @@
 *.suo
 /SharpCompress/obj
 /SharpCompress.Silverlight/obj
+/SharpCompress.Portable/obj
 /SharpCompress.Mono/obj
 /SharpCompress.3.5/obj
 /SharpCompress.Test/obj

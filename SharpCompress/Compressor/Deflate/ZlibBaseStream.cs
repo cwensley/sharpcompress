@@ -298,19 +298,24 @@ namespace SharpCompress.Compressor.Deflate
             _z = null;
         }
 
-
-        public override void Close()
+        protected override void Dispose(bool disposing)
         {
-            if (_stream == null) return;
-            try
+            base.Dispose(disposing);
+            if (disposing)
             {
-                finish();
-            }
-            finally
-            {
-                end();
-                if (!_leaveOpen) _stream.Close();
-                _stream = null;
+                if (_stream == null)
+                    return;
+                try
+                {
+                    finish();
+                }
+                finally
+                {
+                    end();
+                    if (!_leaveOpen)
+                        _stream.Dispose();
+                    _stream = null;
+                }
             }
         }
 

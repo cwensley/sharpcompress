@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using SharpCompress.Common;
+#if THREEFIVE || PORTABLE
+using SharpCompress.Common.Rar.Headers;
+#endif
 
 namespace SharpCompress.Reader
 {

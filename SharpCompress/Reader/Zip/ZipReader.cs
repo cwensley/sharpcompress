@@ -77,7 +77,7 @@ namespace SharpCompress.Reader.Zip
         {
             using (Stream s = parts.First().GetStream())
             {
-                s.CopyTo(writeStream);
+                s.TransferTo(writeStream);
             }
         }
 
