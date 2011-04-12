@@ -27,7 +27,7 @@
 using System;
 using System.IO;
 
-namespace Ionic.Zlib
+namespace SharpCompress.Compressor.Deflate
 {
 
     internal enum ZlibStreamFlavor { ZLIB = 1950, DEFLATE = 1951, GZIP = 1952 }
@@ -50,7 +50,7 @@ namespace Ionic.Zlib
         protected internal CompressionStrategy Strategy = CompressionStrategy.Default;
 
         // workitem 7159
-        Ionic.Zlib.CRC32 crc;
+        CRC32 crc;
         protected internal string _GzipFileName;
         protected internal string _GzipComment;
         protected internal DateTime _GzipMtime;
@@ -569,7 +569,7 @@ namespace Ionic.Zlib
             {
                 compressor.Write(uncompressed, 0, uncompressed.Length);
             }
-        }        
+        }
 
         public static void CompressBuffer(byte[] b, Stream compressor)
         {
@@ -619,7 +619,7 @@ namespace Ionic.Zlib
                 }
                 return output.ToArray();
             }
-        }        
+        }
 
     }
 

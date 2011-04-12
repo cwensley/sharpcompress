@@ -88,10 +88,12 @@
     <Compile Include="Common\ExtractOptions.cs" />
     <Compile Include="Common\FilePart.cs" />
     <Compile Include="Common\Entry.cs" />
+    <Compile Include="Compressor\Deflate\CrcCalculatorStream.cs" />
+    <Compile Include="Compressor\Deflate\FlushType.cs" />
     <Compile Include="Reader\CompressedStreamReader.cs" />
     <Compile Include="Common\Volume.cs" />
-    <Compile Include="Compressor\Deflate\Crc32.cs" />
-    <Compile Include="Compressor\Deflate\Deflate.cs" />
+    <Compile Include="Compressor\Deflate\CRC32.cs" />
+    <Compile Include="Compressor\Deflate\DeflateManager.cs" />
     <Compile Include="Compressor\Deflate\DeflateStream.cs" />
     <Compile Include="Compressor\Deflate\GZipStream.cs" />
     <Compile Include="Compressor\Deflate\Inflate.cs" />

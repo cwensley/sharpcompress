@@ -29,8 +29,9 @@
 
 using System;
 using System.IO;
+using System.Text;
 
-namespace Ionic.Zlib
+namespace SharpCompress.Compressor.Deflate
 {
     /// <summary>
     ///   A class for compressing and decompressing GZIP streams.
@@ -81,7 +82,7 @@ namespace Ionic.Zlib
     ///
     /// <seealso cref="DeflateStream" />
     /// <seealso cref="ZlibStream" />
-    public class GZipStream : System.IO.Stream
+    public class GZipStream : Stream
     {
         // GZip format
         // source: http://tools.ietf.org/html/rfc1952
@@ -120,84 +121,8 @@ namespace Ionic.Zlib
         //
 
 
-
-        /// <summary>
-        ///   The comment on the GZIP stream.
-        /// </summary>
-        ///
-        /// <remarks>
-        /// <para>
-        ///   The GZIP format allows for each file to optionally have an associated
-        ///   comment stored with the file.  The comment is encoded with the ISO-8859-1
-        ///   code page.  To include a comment in a GZIP stream you create, set this
-        ///   property before calling <c>Write()</c> for the first time on the
-        ///   <c>GZipStream</c>.
-        /// </para>
-        ///
-        /// <para>
-        ///   When using <c>GZipStream</c> to decompress, you can retrieve this property
-        ///   after the first call to <c>Read()</c>.  If no comment has been set in the
-        ///   GZIP bytestream, the Comment property will return <c>null</c>
-        ///   (<c>Nothing</c> in VB).
-        /// </para>
-        /// </remarks>
-        public String Comment
-        {
-            get
-            {
-                return _Comment;
-            }
-            set
-            {
-                if (_disposed) throw new ObjectDisposedException("GZipStream");
-                _Comment = value;
-            }
-        }
-
-        /// <summary>
-        ///   The FileName for the GZIP stream.
-        /// </summary>
-        ///
-        /// <remarks>
-        ///
-        /// <para>
-        ///   The GZIP format optionally allows each file to have an associated
-        ///   filename.  When compressing data (through <c>Write()</c>), set this
-        ///   FileName before calling <c>Write()</c> the first time on the <c>GZipStream</c>.
-        ///   The actual filename is encoded into the GZIP bytestream with the
-        ///   ISO-8859-1 code page, according to RFC 1952. It is the application's
-        ///   responsibility to insure that the FileName can be encoded and decoded
-        ///   correctly with this code page.
-        /// </para>
-        ///
-        /// <para>
-        ///   When decompressing (through <c>Read()</c>), you can retrieve this value
-        ///   any time after the first <c>Read()</c>.  In the case where there was no filename
-        ///   encoded into the GZIP bytestream, the property will return <c>null</c> (<c>Nothing</c>
-        ///   in VB).
-        /// </para>
-        /// </remarks>
-        public String FileName
-        {
-            get { return _FileName; }
-            set
-            {
-                if (_disposed) throw new ObjectDisposedException("GZipStream");
-                _FileName = value;
-                if (_FileName == null) return;
-                if (_FileName.IndexOf("/") != -1)
-                {
-                    _FileName = _FileName.Replace("/", "\\");
-                }
-                if (_FileName.EndsWith("\\"))
-                    throw new Exception("Illegal filename");
-                if (_FileName.IndexOf("\\") != -1)
-                {
-                    // trim any leading path
-                    _FileName = Path.GetFileName(_FileName);
-                }
-            }
-        }
+        internal static readonly DateTime _unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        internal static readonly Encoding iso8859dash1 = Encoding.GetEncoding("iso-8859-1");
 
         /// <summary>
         ///   The last modified time for the GZIP stream.
@@ -211,21 +136,14 @@ namespace Ionic.Zlib
         /// </remarks>
         public DateTime? LastModified;
 
-        /// <summary>
-        /// The CRC on the GZIP stream.
-        /// </summary>
-        /// <remarks>
-        /// This is used for internal error checking. You probably don't need to look at this property.
-        /// </remarks>
-        public int Crc32 { get { return _Crc32; } }
+        private string _Comment;
+        private int _Crc32;
+        private string _FileName;
 
-        private int _headerByteCount;
         internal ZlibBaseStream _baseStream;
-        bool _disposed;
-        bool _firstReadDone;
-        string _FileName;
-        string _Comment;
-        int _Crc32;
+        private bool _disposed;
+        private bool _firstReadDone;
+        private int _headerByteCount;
 
 
         /// <summary>
@@ -544,12 +462,13 @@ namespace Ionic.Zlib
         /// <summary>
         /// This property sets the flush behavior on the stream.
         /// </summary>
-        virtual public FlushType FlushMode
+        public virtual FlushType FlushMode
         {
-            get { return (this._baseStream._flushMode); }
-            set {
+            get { return (_baseStream._flushMode); }
+            set
+            {
                 if (_disposed) throw new ObjectDisposedException("GZipStream");
-                this._baseStream._flushMode = value;
+                _baseStream._flushMode = value;
             }
         }
 
@@ -572,71 +491,36 @@ namespace Ionic.Zlib
         /// </remarks>
         public int BufferSize
         {
-            get
-            {
-                return this._baseStream._bufferSize;
-            }
+            get { return _baseStream._bufferSize; }
             set
             {
                 if (_disposed) throw new ObjectDisposedException("GZipStream");
-                if (this._baseStream._workingBuffer != null)
+                if (_baseStream._workingBuffer != null)
                     throw new ZlibException("The working buffer is already set.");
                 if (value < ZlibConstants.WorkingBufferSizeMin)
-                    throw new ZlibException(String.Format("Don't be silly. {0} bytes?? Use a bigger buffer, at least {1}.", value, ZlibConstants.WorkingBufferSizeMin));
-                this._baseStream._bufferSize = value;
+                    throw new ZlibException(
+                        String.Format("Don't be silly. {0} bytes?? Use a bigger buffer, at least {1}.", value,
+                                      ZlibConstants.WorkingBufferSizeMin));
+                _baseStream._bufferSize = value;
             }
         }
 
 
         /// <summary> Returns the total number of bytes input so far.</summary>
-        virtual public long TotalIn
+        public virtual long TotalIn
         {
-            get
-            {
-                return this._baseStream._z.TotalBytesIn;
-            }
+            get { return _baseStream._z.TotalBytesIn; }
         }
 
         /// <summary> Returns the total number of bytes output so far.</summary>
-        virtual public long TotalOut
+        public virtual long TotalOut
         {
-            get
-            {
-                return this._baseStream._z.TotalBytesOut;
-            }
+            get { return _baseStream._z.TotalBytesOut; }
         }
 
         #endregion
 
         #region Stream methods
-
-        /// <summary>
-        /// Dispose the stream.
-        /// </summary>
-        /// <remarks>
-        /// This may or may not result in a <c>Close()</c> call on the captive stream.
-        /// See the doc on constructors that take a <c>leaveOpen</c> parameter for more information.
-        /// </remarks>
-        protected override void Dispose(bool disposing)
-        {
-            try
-            {
-                if (!_disposed)
-                {
-                    if (disposing && (this._baseStream != null))
-                    {
-                        this._baseStream.Close();
-                        this._Crc32 = _baseStream.Crc32;
-                    }
-                    _disposed = true;
-                }
-            }
-            finally
-            {
-                base.Dispose(disposing);
-            }
-        }
-
 
         /// <summary>
         /// Indicates whether the stream can be read.
@@ -681,15 +565,6 @@ namespace Ionic.Zlib
         }
 
         /// <summary>
-        /// Flush the stream.
-        /// </summary>
-        public override void Flush()
-        {
-            if (_disposed) throw new ObjectDisposedException("GZipStream");
-            _baseStream.Flush();
-        }
-
-        /// <summary>
         /// Reading this property always throws a <see cref="NotImplementedException"/>.
         /// </summary>
         public override long Length
@@ -712,14 +587,50 @@ namespace Ionic.Zlib
         {
             get
             {
-                if (this._baseStream._streamMode == Ionic.Zlib.ZlibBaseStream.StreamMode.Writer)
-                    return this._baseStream._z.TotalBytesOut + _headerByteCount;
-                if (this._baseStream._streamMode == Ionic.Zlib.ZlibBaseStream.StreamMode.Reader)
-                    return this._baseStream._z.TotalBytesIn + this._baseStream._gzipHeaderByteCount;
+                if (_baseStream._streamMode == ZlibBaseStream.StreamMode.Writer)
+                    return _baseStream._z.TotalBytesOut + _headerByteCount;
+                if (_baseStream._streamMode == ZlibBaseStream.StreamMode.Reader)
+                    return _baseStream._z.TotalBytesIn + _baseStream._gzipHeaderByteCount;
                 return 0;
             }
 
             set { throw new NotImplementedException(); }
+        }
+
+        /// <summary>
+        /// Dispose the stream.
+        /// </summary>
+        /// <remarks>
+        /// This may or may not result in a <c>Close()</c> call on the captive stream.
+        /// See the doc on constructors that take a <c>leaveOpen</c> parameter for more information.
+        /// </remarks>
+        protected override void Dispose(bool disposing)
+        {
+            try
+            {
+                if (!_disposed)
+                {
+                    if (disposing && (_baseStream != null))
+                    {
+                        _baseStream.Close();
+                        _Crc32 = _baseStream.Crc32;
+                    }
+                    _disposed = true;
+                }
+            }
+            finally
+            {
+                base.Dispose(disposing);
+            }
+        }
+
+        /// <summary>
+        /// Flush the stream.
+        /// </summary>
+        public override void Flush()
+        {
+            if (_disposed) throw new ObjectDisposedException("GZipStream");
+            _baseStream.Flush();
         }
 
         /// <summary>
@@ -771,7 +682,6 @@ namespace Ionic.Zlib
         }
 
 
-
         /// <summary>
         ///   Calling this method always throws a <see cref="NotImplementedException"/>.
         /// </summary>
@@ -817,7 +727,7 @@ namespace Ionic.Zlib
         public override void Write(byte[] buffer, int offset, int count)
         {
             if (_disposed) throw new ObjectDisposedException("GZipStream");
-            if (_baseStream._streamMode == Ionic.Zlib.ZlibBaseStream.StreamMode.Undefined)
+            if (_baseStream._streamMode == ZlibBaseStream.StreamMode.Undefined)
             {
                 //Console.WriteLine("GZipStream: First write");
                 if (_baseStream._wantCompress)
@@ -833,11 +743,94 @@ namespace Ionic.Zlib
 
             _baseStream.Write(buffer, offset, count);
         }
+
         #endregion
 
+        /// <summary>
+        ///   The comment on the GZIP stream.
+        /// </summary>
+        ///
+        /// <remarks>
+        /// <para>
+        ///   The GZIP format allows for each file to optionally have an associated
+        ///   comment stored with the file.  The comment is encoded with the ISO-8859-1
+        ///   code page.  To include a comment in a GZIP stream you create, set this
+        ///   property before calling <c>Write()</c> for the first time on the
+        ///   <c>GZipStream</c>.
+        /// </para>
+        ///
+        /// <para>
+        ///   When using <c>GZipStream</c> to decompress, you can retrieve this property
+        ///   after the first call to <c>Read()</c>.  If no comment has been set in the
+        ///   GZIP bytestream, the Comment property will return <c>null</c>
+        ///   (<c>Nothing</c> in VB).
+        /// </para>
+        /// </remarks>
+        public String Comment
+        {
+            get { return _Comment; }
+            set
+            {
+                if (_disposed) throw new ObjectDisposedException("GZipStream");
+                _Comment = value;
+            }
+        }
 
-        internal static readonly System.DateTime _unixEpoch = new System.DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-        internal static readonly System.Text.Encoding iso8859dash1 = System.Text.Encoding.GetEncoding("iso-8859-1");
+        /// <summary>
+        ///   The FileName for the GZIP stream.
+        /// </summary>
+        ///
+        /// <remarks>
+        ///
+        /// <para>
+        ///   The GZIP format optionally allows each file to have an associated
+        ///   filename.  When compressing data (through <c>Write()</c>), set this
+        ///   FileName before calling <c>Write()</c> the first time on the <c>GZipStream</c>.
+        ///   The actual filename is encoded into the GZIP bytestream with the
+        ///   ISO-8859-1 code page, according to RFC 1952. It is the application's
+        ///   responsibility to insure that the FileName can be encoded and decoded
+        ///   correctly with this code page.
+        /// </para>
+        ///
+        /// <para>
+        ///   When decompressing (through <c>Read()</c>), you can retrieve this value
+        ///   any time after the first <c>Read()</c>.  In the case where there was no filename
+        ///   encoded into the GZIP bytestream, the property will return <c>null</c> (<c>Nothing</c>
+        ///   in VB).
+        /// </para>
+        /// </remarks>
+        public String FileName
+        {
+            get { return _FileName; }
+            set
+            {
+                if (_disposed) throw new ObjectDisposedException("GZipStream");
+                _FileName = value;
+                if (_FileName == null) return;
+                if (_FileName.IndexOf("/") != -1)
+                {
+                    _FileName = _FileName.Replace("/", "\\");
+                }
+                if (_FileName.EndsWith("\\"))
+                    throw new Exception("Illegal filename");
+                if (_FileName.IndexOf("\\") != -1)
+                {
+                    // trim any leading path
+                    _FileName = Path.GetFileName(_FileName);
+                }
+            }
+        }
+
+        /// <summary>
+        /// The CRC on the GZIP stream.
+        /// </summary>
+        /// <remarks>
+        /// This is used for internal error checking. You probably don't need to look at this property.
+        /// </remarks>
+        public int Crc32
+        {
+            get { return _Crc32; }
+        }
 
 
         private int EmitHeader()
@@ -849,7 +842,7 @@ namespace Ionic.Zlib
             int fnLength = (FileName == null) ? 0 : filenameBytes.Length + 1;
 
             int bufferLength = 10 + cbLength + fnLength;
-            byte[] header = new byte[bufferLength];
+            var header = new byte[bufferLength];
             int i = 0;
             // ID
             header[i++] = 0x1F;
@@ -868,13 +861,13 @@ namespace Ionic.Zlib
 
             // mtime
             if (!LastModified.HasValue) LastModified = DateTime.Now;
-            System.TimeSpan delta = LastModified.Value - _unixEpoch;
-            Int32 timet = (Int32)delta.TotalSeconds;
+            TimeSpan delta = LastModified.Value - _unixEpoch;
+            var timet = (Int32)delta.TotalSeconds;
             Array.Copy(BitConverter.GetBytes(timet), 0, header, i, 4);
             i += 4;
 
             // xflg
-            header[i++] = 0;    // this field is totally useless
+            header[i++] = 0; // this field is totally useless
             // OS
             header[i++] = 0xFF; // 0xFF == unspecified
 
@@ -904,7 +897,6 @@ namespace Ionic.Zlib
         }
 
 
-
         /// <summary>
         ///   Compress a string into a byte array using GZip.
         /// </summary>
@@ -926,7 +918,7 @@ namespace Ionic.Zlib
         {
             using (var ms = new MemoryStream())
             {
-                System.IO.Stream compressor =
+                Stream compressor =
                     new GZipStream(ms, CompressionMode.Compress, CompressionLevel.BestCompression);
                 ZlibBaseStream.CompressString(s, compressor);
                 return ms.ToArray();
@@ -954,8 +946,8 @@ namespace Ionic.Zlib
         {
             using (var ms = new MemoryStream())
             {
-                System.IO.Stream compressor =
-                    new GZipStream( ms, CompressionMode.Compress, CompressionLevel.BestCompression );
+                Stream compressor =
+                    new GZipStream(ms, CompressionMode.Compress, CompressionLevel.BestCompression);
 
                 ZlibBaseStream.CompressBuffer(b, compressor);
                 return ms.ToArray();
@@ -999,15 +991,13 @@ namespace Ionic.Zlib
         /// <returns>The data in uncompressed form</returns>
         public static byte[] UncompressBuffer(byte[] compressed)
         {
-            using (var input = new System.IO.MemoryStream(compressed))
+            using (var input = new MemoryStream(compressed))
             {
-                System.IO.Stream decompressor =
-                    new GZipStream( input, CompressionMode.Decompress );
+                Stream decompressor =
+                    new GZipStream(input, CompressionMode.Decompress);
 
                 return ZlibBaseStream.UncompressBuffer(compressed, decompressor);
             }
         }
-
-
     }
 }

@@ -64,10 +64,9 @@
 
 
 
-using System;
-using Interop=System.Runtime.InteropServices;
+using Interop = System.Runtime.InteropServices;
 
-namespace Ionic.Zlib
+namespace SharpCompress.Compressor.Deflate
 {
 
     /// <summary>
@@ -80,7 +79,7 @@ namespace Ionic.Zlib
         /// If you are producing ZIPs for use on Mac OSX, be aware that archives produced with CompressionLevel.None
         /// cannot be opened with the default zip reader. Use a different CompressionLevel.
         /// </summary>
-        None= 0,
+        None = 0,
         /// <summary>
         /// Same as None.
         /// </summary>
@@ -110,7 +109,7 @@ namespace Ionic.Zlib
         /// A little slower, but better, than level 3.
         /// </summary>
         Level4 = 4,
-        
+
         /// <summary>
         /// A little slower than level 4, but with better compression.
         /// </summary>
@@ -184,7 +183,7 @@ namespace Ionic.Zlib
         /// <summary>
         /// Used to specify that the stream should compress the data.
         /// </summary>
-        Compress= 0,
+        Compress = 0,
         /// <summary>
         /// Used to specify that the stream should decompress the data.
         /// </summary>
@@ -243,7 +242,7 @@ namespace Ionic.Zlib
             return (long) ((UInt64)number >> bits);
         }
 #endif
-        
+
         /// <summary>
         ///   Reads a number of characters from the current source TextReader and writes
         ///   the data to the target array at the specified index.
@@ -291,24 +290,24 @@ namespace Ionic.Zlib
 
     internal static class InternalConstants
     {
-        internal static readonly int MAX_BITS     = 15;
-        internal static readonly int BL_CODES     = 19;
-        internal static readonly int D_CODES      = 30;
-        internal static readonly int LITERALS     = 256;
+        internal static readonly int MAX_BITS = 15;
+        internal static readonly int BL_CODES = 19;
+        internal static readonly int D_CODES = 30;
+        internal static readonly int LITERALS = 256;
         internal static readonly int LENGTH_CODES = 29;
-        internal static readonly int L_CODES      = (LITERALS + 1 + LENGTH_CODES);
-        
+        internal static readonly int L_CODES = (LITERALS + 1 + LENGTH_CODES);
+
         // Bit length codes must not exceed MAX_BL_BITS bits
-        internal static readonly int MAX_BL_BITS  = 7;
+        internal static readonly int MAX_BL_BITS = 7;
 
         // repeat previous bit length 3-6 times (2 bits of repeat count)
-        internal static readonly int REP_3_6      = 16;
+        internal static readonly int REP_3_6 = 16;
 
         // repeat a zero length 3-10 times  (3 bits of repeat count)
-        internal static readonly int REPZ_3_10    = 17;
+        internal static readonly int REPZ_3_10 = 17;
 
         // repeat a zero length 11-138 times  (7 bits of repeat count)
-        internal static readonly int REPZ_11_138  = 18;
+        internal static readonly int REPZ_11_138 = 18;
 
     }
 
@@ -359,6 +358,10 @@ namespace Ionic.Zlib
             1, 5, 17, 5, 9, 5, 25, 5, 5, 5, 21, 5, 13, 5, 29, 5,
             3, 5, 19, 5, 11, 5, 27, 5, 7, 5, 23, 5 };
 
+        // extra bits for each bit length code
+        internal static readonly int[] extra_blbits = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 3, 7 };
+
+
         internal static readonly StaticTree Literals;
         internal static readonly StaticTree Distances;
         internal static readonly StaticTree BitLengths;
@@ -379,14 +382,14 @@ namespace Ionic.Zlib
         }
         static StaticTree()
         {
-            Literals = new StaticTree(lengthAndLiteralsTreeCodes, Tree.ExtraLengthBits, InternalConstants.LITERALS + 1, InternalConstants.L_CODES, InternalConstants.MAX_BITS);
-            Distances = new StaticTree(distTreeCodes, Tree.ExtraDistanceBits, 0, InternalConstants.D_CODES, InternalConstants.MAX_BITS);
-            BitLengths = new StaticTree(null, Tree.extra_blbits, 0, InternalConstants.BL_CODES, InternalConstants.MAX_BL_BITS);
+            Literals = new StaticTree(lengthAndLiteralsTreeCodes, DeflateManager.ExtraLengthBits, InternalConstants.LITERALS + 1, InternalConstants.L_CODES, InternalConstants.MAX_BITS);
+            Distances = new StaticTree(distTreeCodes, DeflateManager.ExtraDistanceBits, 0, InternalConstants.D_CODES, InternalConstants.MAX_BITS);
+            BitLengths = new StaticTree(null, extra_blbits, 0, InternalConstants.BL_CODES, InternalConstants.MAX_BL_BITS);
         }
     }
 
 
-    
+
     /// <summary>
     /// Computes an Adler-32 checksum. 
     /// </summary>
@@ -408,8 +411,8 @@ namespace Ionic.Zlib
             if (buf == null)
                 return 1;
 
-            int s1 = (int) (adler & 0xffff);
-            int s2 = (int) ((adler >> 16) & 0xffff);
+            int s1 = (int)(adler & 0xffff);
+            int s2 = (int)((adler >> 16) & 0xffff);
 
             while (len > 0)
             {
@@ -440,7 +443,7 @@ namespace Ionic.Zlib
                 {
                     do
                     {
-                        s1 += buf[index++]; 
+                        s1 += buf[index++];
                         s2 += s1;
                     }
                     while (--k != 0);

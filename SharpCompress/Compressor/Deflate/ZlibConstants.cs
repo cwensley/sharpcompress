@@ -61,9 +61,8 @@
 // -----------------------------------------------------------------------
 
 
-using System;
 
-namespace Ionic.Zlib
+namespace SharpCompress.Compressor.Deflate
 {
     /// <summary>
     /// A bunch of constants used in the Zlib interface.
@@ -116,7 +115,7 @@ namespace Ionic.Zlib
 #if NETCF        
         public const int WorkingBufferSizeDefault = 8192;
 #else
-        public const int WorkingBufferSizeDefault = 16384; 
+        public const int WorkingBufferSizeDefault = 16384;
 #endif
         /// <summary>
         /// The minimum size of the working buffer used in the ZlibCodec class.  Currently it is 128 bytes.
