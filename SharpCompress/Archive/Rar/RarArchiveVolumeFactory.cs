@@ -35,31 +35,24 @@ namespace SharpCompress.Archive.Rar
             {
                 yield break; //if file isn't volume then there is no reason to look
             }
-            FileInfoRarFilePart splitFilePart = FindSplitFilePart(part);
             ArchiveHeader ah = part.ArchiveHeader;
-            while (splitFilePart != null)
+            fileInfo = GetNextFileInfo(ah, part.FileParts.FirstOrDefault() as FileInfoRarFilePart);
+            //we use fileinfo because rar is dumb and looks at file names rather than archive info for another volume
+            while (fileInfo != null)
             {
-                fileInfo = GetNextFileInfo(ah, splitFilePart);
                 part = new FileInfoRarArchiveVolume(fileInfo, options);
-                splitFilePart = FindSplitFilePart(part);
+
+                fileInfo = GetNextFileInfo(ah, part.FileParts.FirstOrDefault() as FileInfoRarFilePart);
                 yield return part;
             }
         }
 
-        private static FileInfoRarFilePart FindSplitFilePart(FileInfoRarArchiveVolume part)
-        {
-            return part.FileParts
-                   .Where(fp => HasSplitFlag(fp.FileHeader))
-                   .SingleOrDefault() as FileInfoRarFilePart;
-        }
-
-        private static bool HasSplitFlag(FileHeader fh)
-        {
-            return fh.FileFlags.HasFlag(FileFlags.SPLIT_AFTER);
-        }
-
         private static FileInfo GetNextFileInfo(ArchiveHeader ah, FileInfoRarFilePart currentFilePart)
         {
+            if (currentFilePart == null)
+            {
+                return null;
+            }
             bool oldNumbering = !ah.ArchiveHeaderFlags.HasFlag(ArchiveFlags.NEWNUMBERING)
                 || currentFilePart.MarkHeader.OldFormat;
             if (oldNumbering)

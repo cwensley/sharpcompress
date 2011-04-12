@@ -34,9 +34,9 @@ namespace SharpCompress.Reader.Rar
         {
             if (!base.NextEntryForCurrentStream())
             {
-                if (streams.MoveNext())
+                //if we're got another stream to try to process then do so
+                if (streams.MoveNext() && LoadStreamForReading(streams.Current))
                 {
-                    tempStream = streams.Current;
                     return true;
                 }
                 return false;

@@ -1,17 +1,17 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using SharpCompress.Archive.Rar;
 using SharpCompress.Common;
 using SharpCompress.Reader.Rar;
+
 namespace SharpCompress.Test
 {
     static class Program
     {
         static void Main()
         {
-            TestRar2();
+            TestRar3();
         }
 
         public static void TestRar()
@@ -37,9 +37,19 @@ namespace SharpCompress.Test
             }
         }
 
+        public static void TestRar3()
+        {
+            var archive = RarArchive.Open(@"C:\Code\sharpcompress\TestArchives\sharpcompress2.part001.rar");
+            foreach (var entry in archive.Entries)
+            {
+                Console.WriteLine(entry.FilePath);
+                entry.WriteToDirectory(@"C:\temp", ExtractOptions.ExtractFullPath | ExtractOptions.Overwrite);
+            }
+        }
+
         private static IEnumerable<Stream> TestRar2Streams()
         {
-            string file = @"C:\Git\sharpcompress\TestArchives\sharpcompress2.part001.rar";
+            string file = @"C:\Code\sharpcompress\TestArchives\sharpcompress2.part001.rar";
             int count = 1;
             while (File.Exists(file))
             {
@@ -47,7 +57,7 @@ namespace SharpCompress.Test
                 yield return File.OpenRead(file);
 
                 count++;
-                file = @"C:\Git\sharpcompress\TestArchives\sharpcompress2.part";
+                file = @"C:\Code\sharpcompress\TestArchives\sharpcompress2.part";
                 if (count < 10)
                 {
                     file += "00";
