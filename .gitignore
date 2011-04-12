@@ -8,3 +8,4 @@
 /SharpCompress.Test/obj
 /SharpCompress.Test/bin
 /_ReSharper.SharpCompress/
+*.user

@@ -88,7 +88,7 @@
     <Compile Include="Common\ExtractOptions.cs" />
     <Compile Include="Common\FilePart.cs" />
     <Compile Include="Common\Entry.cs" />
-    <Compile Include="Common\CompressedStreamReader.cs" />
+    <Compile Include="Reader\CompressedStreamReader.cs" />
     <Compile Include="Common\Volume.cs" />
     <Compile Include="Compressor\Deflate\Crc32.cs" />
     <Compile Include="Compressor\Deflate\Deflate.cs" />
@@ -122,7 +122,7 @@
     <Compile Include="Common\ReaderOptions.cs" />
     <Compile Include="Reader\Rar\MultiVolumeRarReader.cs" />
     <Compile Include="Reader\Rar\RarReader.cs" />
-    <Compile Include="Reader\Rar\RarReader.Extensions.cs" />
+    <Compile Include="Reader\CompressedStreamReader.Extensions.cs" />
     <Compile Include="Reader\Rar\RarReaderEntry.cs" />
     <Compile Include="Archive\Rar\SeekableStreamFilePart.cs" />
     <Compile Include="Reader\Rar\SingleVolumeRarReader.cs" />

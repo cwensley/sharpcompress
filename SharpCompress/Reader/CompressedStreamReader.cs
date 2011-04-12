@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using SharpCompress.Common;
 
-namespace SharpCompress.Common
+namespace SharpCompress.Reader
 {
     /// <summary>
     /// A generic push reader that reads unseekable comrpessed streams.

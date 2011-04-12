@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using SharpCompress.Archive.Rar;
 using SharpCompress.Common;
+using SharpCompress.Reader;
 using SharpCompress.Reader.Rar;
+using SharpCompress.Reader.Zip;
 
 namespace SharpCompress.Test
 {
@@ -11,7 +13,7 @@ namespace SharpCompress.Test
     {
         static void Main()
         {
-            TestRar3();
+            TestZip();
         }
 
         public static void TestRar()
@@ -23,6 +25,22 @@ namespace SharpCompress.Test
             }
         }
 
+        public static void TestZip()
+        {
+            using (Stream stream = File.OpenRead(@"C:\Code\sharpcompress\TestArchives\sharpcompress.zip"))
+            {
+                var reader = ZipReader.Open(stream);
+                while (reader.MoveToNextEntry())
+                {
+                    if (!reader.Entry.IsDirectory)
+                    {
+                        Console.WriteLine(reader.Entry.FilePath);
+                        reader.WriteEntryToDirectory(@"C:\temp",
+                                                     ExtractOptions.ExtractFullPath | ExtractOptions.Overwrite);
+                    }
+                }
+            }
+        }
 
         public static void TestRar2()
         {

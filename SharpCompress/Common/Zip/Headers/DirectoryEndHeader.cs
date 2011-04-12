@@ -4,6 +4,11 @@ namespace SharpCompress.Common.Zip.Headers
 {
     public class DirectoryEndHeader : ZipHeader
     {
+        public DirectoryEndHeader()
+            : base(ZipHeaderType.DirectoryEnd)
+        {
+        }
+
         internal override void Read(MarkingBinaryReader reader)
         {
             VolumeNumber = reader.ReadUInt16();

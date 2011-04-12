@@ -5,6 +5,11 @@ namespace SharpCompress.Common.Zip.Headers
 {
     public class DirectoryEntryHeader : ZipHeader
     {
+        public DirectoryEntryHeader()
+            : base(ZipHeaderType.DirectoryEntry)
+        {
+        }
+
         internal override void Read(MarkingBinaryReader reader)
         {
             Version = reader.ReadUInt16();

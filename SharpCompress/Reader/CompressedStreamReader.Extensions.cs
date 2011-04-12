@@ -4,19 +4,19 @@ using SharpCompress.Common;
 using SharpCompress.Common.Rar.Headers;
 #endif
 
-namespace SharpCompress.Reader.Rar
+namespace SharpCompress.Reader
 {
-    public static class RarReaderExtensions
+    public static class CompressedStreamReaderExtensions
     {
 #if !PORTABLE
-        public static void WriteEntryTo(this RarReader reader, string filePath)
+        public static void WriteEntryTo(this CompressedStreamReader reader, string filePath)
         {
             using (Stream stream = File.Open(filePath, FileMode.Create, FileAccess.Write))
             {
                 reader.WriteEntryTo(stream);
             }
         }
-        public static void WriteEntryTo(this RarReader reader, FileInfo filePath)
+        public static void WriteEntryTo(this CompressedStreamReader reader, FileInfo filePath)
         {
             using (Stream stream = filePath.Open(FileMode.Create))
             {
@@ -27,7 +27,7 @@ namespace SharpCompress.Reader.Rar
         /// <summary>
         /// Extract to specific directory, retaining filename
         /// </summary>
-        public static void WriteEntryToDirectory(this RarReader reader, string destinationDirectory,
+        public static void WriteEntryToDirectory(this CompressedStreamReader reader, string destinationDirectory,
             ExtractOptions options = ExtractOptions.Overwrite)
         {
             string destinationFileName = string.Empty;
@@ -55,7 +55,7 @@ namespace SharpCompress.Reader.Rar
         /// <summary>
         /// Extract to specific file
         /// </summary>
-        public static void WriteEntryToFile(this RarReader reader, string destinationFileName,
+        public static void WriteEntryToFile(this CompressedStreamReader reader, string destinationFileName,
             ExtractOptions options = ExtractOptions.Overwrite)
         {
             FileMode fm = FileMode.Create;

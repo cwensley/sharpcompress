@@ -1,6 +1,5 @@
 ﻿using System.IO;
-using System.IO.Compression;
-using SharpCompress.Common;
+using Ionic.Zlib;
 using SharpCompress.Common.Zip.Headers;
 
 namespace SharpCompress.Common.Zip

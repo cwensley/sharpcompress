@@ -8,6 +8,11 @@ namespace SharpCompress.Common.Zip.Headers
     {
         private readonly static Encoding DefaultEncoding = Encoding.GetEncoding("IBM437");
 
+        public LocalEntryHeader()
+            : base(ZipHeaderType.LocalEntry)
+        {
+        }
+
         internal override void Read(MarkingBinaryReader reader)
         {
             Version = reader.ReadUInt16();

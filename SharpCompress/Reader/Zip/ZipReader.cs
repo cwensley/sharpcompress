@@ -8,7 +8,7 @@ using SharpCompress.Common.Zip.Headers;
 
 namespace SharpCompress.Reader.Zip
 {
-    public class ZipReader : SharpCompress.Common.CompressedStreamReader
+    public class ZipReader : CompressedStreamReader
     {
         private readonly Stream stream;
 
@@ -23,14 +23,36 @@ namespace SharpCompress.Reader.Zip
             get { throw new NotImplementedException(); }
         }
 
+
+        #region Open
+        /// <summary>
+        /// Opens a ZipReader for Non-seeking usage with a single volume
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="listener"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
         public static ZipReader Open(Stream stream, IExtractionListener listener,
-           ReaderOptions options = ReaderOptions.KeepStreamsOpen)
+            ReaderOptions options = ReaderOptions.KeepStreamsOpen)
         {
             stream.CheckNotNull("stream");
             return new ZipReader(stream, options, listener);
         }
 
-        internal override IEnumerable<Common.FilePart> CreateFilePartEnumerableForCurrentEntry()
+        /// <summary>
+        /// Opens a ZipReader for Non-seeking usage with a single volume
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public static ZipReader Open(Stream stream, ReaderOptions options = ReaderOptions.KeepStreamsOpen)
+        {
+            stream.CheckNotNull("stream");
+            return Open(stream, new NullExtractionListener(), options);
+        }
+        #endregion
+
+        internal override IEnumerable<FilePart> CreateFilePartEnumerableForCurrentEntry()
         {
             return base.Entry.Parts;
         }
@@ -65,9 +87,17 @@ namespace SharpCompress.Reader.Zip
             {
                 if (h != null)
                 {
-                    if (h is LocalEntryHeader)
+                    switch (h.ZipHeaderType)
                     {
-                        yield return new ZipReaderEntry(new ZipFilePart(h as LocalEntryHeader));
+                        case ZipHeaderType.LocalEntry:
+                            {
+                                yield return new ZipReaderEntry(new ZipFilePart(h as LocalEntryHeader));
+                            }
+                            break;
+                        case ZipHeaderType.DirectoryEnd:
+                            {
+                                yield break;
+                            }
                     }
                 }
             }
