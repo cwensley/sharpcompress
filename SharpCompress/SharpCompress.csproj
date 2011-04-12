@@ -85,6 +85,7 @@
   <ItemGroup>
     <Compile Include="Archive\Rar\RarArchiveVolume.cs" />
     <Compile Include="Archive\Rar\StreamRarArchiveVolume.cs" />
+    <Compile Include="Archive\Zip\ZipArchive.cs" />
     <Compile Include="Common\ExtractOptions.cs" />
     <Compile Include="Common\FilePart.cs" />
     <Compile Include="Common\Entry.cs" />

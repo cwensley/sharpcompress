@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using SharpCompress.Archive.Rar;
+using SharpCompress.Archive.Zip;
 using SharpCompress.Common;
 using SharpCompress.Reader;
 using SharpCompress.Reader.Rar;
@@ -27,6 +28,10 @@ namespace SharpCompress.Test
 
         public static void TestZip()
         {
+            if (!ZipArchive.IsZipFile(@"C:\Code\sharpcompress\TestArchives\sharpcompress.zip"))
+            {
+                throw new InvalidOperationException();
+            }
             using (Stream stream = File.OpenRead(@"C:\Code\sharpcompress\TestArchives\sharpcompress.zip"))
             {
                 var reader = ZipReader.Open(stream);
