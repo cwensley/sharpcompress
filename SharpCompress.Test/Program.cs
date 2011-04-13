@@ -14,7 +14,8 @@ namespace SharpCompress.Test
     {
         static void Main()
         {
-            TestRewind();
+            new RewindableStreamTest().Test();
+           // TestRewind();
         }
 
         public static void TestRewind()
