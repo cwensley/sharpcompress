@@ -16,16 +16,16 @@
     <Name>Documentation</Name>
     <!-- SHFB properties -->
     <OutputPath>.\Help\</OutputPath>
-    <HtmlHelpName>nunrar</HtmlHelpName>
+    <HtmlHelpName>sharpcompress</HtmlHelpName>
     <Language>en-US</Language>
-    <RootNamespaceTitle>NUnrar</RootNamespaceTitle>
+    <RootNamespaceTitle>SharpCompress</RootNamespaceTitle>
     <SandcastlePath>..\..\Program Files\Sandcastle\</SandcastlePath>
     <DocumentationSources>
-      <DocumentationSource sourceFile="bin\NUnrar.dll" xmlns="" />
-<DocumentationSource sourceFile="bin\NUnrar.XML" xmlns="" /></DocumentationSources>
-    <HelpTitle>NUnrar</HelpTitle>
+      <DocumentationSource sourceFile="bin\SharpCompress.dll" />
+<DocumentationSource sourceFile="bin\SharpCompress.xml" /></DocumentationSources>
+    <HelpTitle>SharpCompress</HelpTitle>
     <PresentationStyle>Prototype</PresentationStyle>
-    <HelpFileFormat>HtmlHelp1, MSHelpViewer</HelpFileFormat>
+    <HelpFileFormat>HtmlHelp1</HelpFileFormat>
     <MissingTags>AutoDocumentCtors, AutoDocumentDispose</MissingTags>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in

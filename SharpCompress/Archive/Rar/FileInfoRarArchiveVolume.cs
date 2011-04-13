@@ -2,10 +2,9 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using SharpCompress.Common;
+using SharpCompress.Common.Rar;
 using SharpCompress.Common.Rar.Headers;
 using SharpCompress.IO;
-using SharpCompress.Rar;
-using SharpCompress.Common.Rar;
 
 namespace SharpCompress.Archive.Rar
 {

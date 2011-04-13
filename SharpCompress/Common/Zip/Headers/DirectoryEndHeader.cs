@@ -2,7 +2,7 @@
 
 namespace SharpCompress.Common.Zip.Headers
 {
-    public class DirectoryEndHeader : ZipHeader
+    internal class DirectoryEndHeader : ZipHeader
     {
         public DirectoryEndHeader()
             : base(ZipHeaderType.DirectoryEnd)

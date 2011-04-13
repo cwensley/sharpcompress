@@ -95,7 +95,7 @@ namespace SharpCompress.Reader.Zip
                     {
                         case ZipHeaderType.LocalEntry:
                             {
-                                yield return new ZipReaderEntry(new ZipFilePart(h as LocalEntryHeader));
+                                yield return new ZipEntry(new ZipFilePart(h as LocalEntryHeader));
                             }
                             break;
                         case ZipHeaderType.DirectoryEnd:

@@ -1,8 +1,7 @@
 ﻿using System.IO;
 using SharpCompress.Common;
-using SharpCompress.IO;
-using SharpCompress.Rar;
 using SharpCompress.Common.Rar;
+using SharpCompress.IO;
 
 namespace SharpCompress.Archive.Rar
 {

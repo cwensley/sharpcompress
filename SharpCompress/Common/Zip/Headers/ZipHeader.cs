@@ -2,7 +2,7 @@
 
 namespace SharpCompress.Common.Zip.Headers
 {
-    public abstract class ZipHeader
+    internal abstract class ZipHeader
     {
         protected ZipHeader(ZipHeaderType type)
         {
@@ -14,7 +14,7 @@ namespace SharpCompress.Common.Zip.Headers
         internal abstract void Read(MarkingBinaryReader reader);
     }
 
-    public enum ZipHeaderType
+    internal enum ZipHeaderType
     {
         LocalEntry,
         DirectoryEntry,

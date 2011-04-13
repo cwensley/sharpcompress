@@ -5,11 +5,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpCompress", "SharpCompr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpCompress.Test", "SharpCompress.Test\SharpCompress.Test.csproj", "{15679D7A-F22C-4943-87FF-BF5C76C4A6FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpCompress.3.5", "SharpCompress.3.5\SharpCompress.3.5.csproj", "{43F219EC-21D3-4EA8-8379-151AF9580CB8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpCompress.3.5", "SharpCompress\SharpCompress.3.5.csproj", "{43F219EC-21D3-4EA8-8379-151AF9580CB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpCompress.Silverlight", "SharpCompress.Silverlight\SharpCompress.Silverlight.csproj", "{185ED218-A74F-4F57-85A5-30647495E615}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpCompress.Silverlight", "SharpCompress\SharpCompress.Silverlight.csproj", "{185ED218-A74F-4F57-85A5-30647495E615}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpCompress.Portable", "SharpCompress.Portable\SharpCompress.Portable.csproj", "{7FA7D133-1417-4F85-9998-4C618AC8FEDA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpCompress.Portable", "SharpCompress\SharpCompress.Portable.csproj", "{7FA7D133-1417-4F85-9998-4C618AC8FEDA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

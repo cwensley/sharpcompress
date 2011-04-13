@@ -22,7 +22,7 @@ namespace SharpCompress.Compressor.Deflate
     /// DotNetZip library.
     /// </para>
     /// </remarks>
-    public class CrcCalculatorStream : Stream, IDisposable
+    internal class CrcCalculatorStream : Stream, IDisposable
     {
         private static readonly Int64 UnsetLengthLimit = -99;
 

@@ -5,7 +5,7 @@ using SharpCompress.IO;
 
 namespace SharpCompress.Common.Zip
 {
-    public static class ZipHeaderFactory
+    internal static class ZipHeaderFactory
     {
         private const uint ENTRY_HEADER_BYTES = 0x04034b50;
         private const uint POST_DATA_DESCRIPTOR = 0x08074b50;
@@ -15,7 +15,7 @@ namespace SharpCompress.Common.Zip
 
         private const uint ZIP64_END_OF_CENTRAL_DIRECTORY = 0x07064b50;
 
-        public static IEnumerable<ZipHeader> ReadHeaderNonseekable(Stream stream)
+        internal static IEnumerable<ZipHeader> ReadHeaderNonseekable(Stream stream)
         {
             while (true)
             {

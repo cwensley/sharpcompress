@@ -5,7 +5,6 @@ using SharpCompress.Common;
 #if PORTABLE || THREEFIVE
 using SharpCompress.Common.Rar.Headers;
 #endif
-using SharpCompress.Rar;
 using SharpCompress.Compressor.Rar;
 using SharpCompress.Common.Rar;
 

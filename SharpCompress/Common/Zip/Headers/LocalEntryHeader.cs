@@ -4,7 +4,7 @@ using SharpCompress.IO;
 
 namespace SharpCompress.Common.Zip.Headers
 {
-    public class LocalEntryHeader : ZipHeader
+    internal class LocalEntryHeader : ZipHeader
     {
         private readonly static Encoding DefaultEncoding = Encoding.GetEncoding("IBM437");
 

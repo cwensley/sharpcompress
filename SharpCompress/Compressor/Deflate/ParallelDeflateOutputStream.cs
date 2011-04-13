@@ -50,7 +50,7 @@ namespace SharpCompress.Compressor.Deflate
             compressor.InputBuffer = buffer;
         }
 
-#region Nested type: Status
+        #region Nested type: Status
 
         internal enum Status
         {
@@ -63,7 +63,7 @@ namespace SharpCompress.Compressor.Deflate
             Done = 6
         }
 
-#endregion
+        #endregion
     }
 
     /// <summary>
@@ -83,7 +83,7 @@ namespace SharpCompress.Compressor.Deflate
     /// </para>
     ///
     /// <para>
-    ///   This class is similar to <see cref="Ionic.Zlib.DeflateStream"/>, except
+    ///   This class is similar to <see cref="DeflateStream"/>, except
     ///   that this implementation uses an approach that employs multiple worker
     ///   threads to perform the DEFLATE.  On a multi-cpu or multi-core computer,
     ///   the performance of this class can be significantly higher than the
@@ -104,8 +104,8 @@ namespace SharpCompress.Compressor.Deflate
     /// </para>
     ///
     /// </remarks>
-    /// <seealso cref="Ionic.Zlib.DeflateStream" />
-    public class ParallelDeflateOutputStream : Stream
+    /// <seealso cref="DeflateStream" />
+    internal class ParallelDeflateOutputStream : Stream
     {
         private static readonly int IO_BUFFER_SIZE_DEFAULT = 64 * 1024; // 128k
         private readonly CompressionLevel _compressLevel;
@@ -150,7 +150,7 @@ namespace SharpCompress.Compressor.Deflate
         /// </para>
         ///
         /// <para>
-        ///   This class is similar to <see cref="Ionic.Zlib.DeflateStream"/>,
+        ///   This class is similar to <see cref="DeflateStream"/>,
         ///   except that this implementation uses an approach that employs
         ///   multiple worker threads to perform the DEFLATE.  On a multi-cpu or
         ///   multi-core computer, the performance of this class can be
@@ -360,7 +360,7 @@ namespace SharpCompress.Compressor.Deflate
         ///   memory but result in less effective compression.  For example, using
         ///   the default buffer size of 128k, the compression delivered is within
         ///   1% of the compression delivered by the single-threaded <see
-        ///   cref="Ionic.Zlib.DeflateStream"/>.  On the other hand, using a
+        ///   cref="DeflateStream"/>.  On the other hand, using a
         ///   BufferSize of 8k can result in a compressed data stream that is 5%
         ///   larger than that delivered by the single-threaded
         ///   <c>DeflateStream</c>.  Excessively small buffer sizes can also cause
@@ -506,7 +506,7 @@ namespace SharpCompress.Compressor.Deflate
         /// </para>
         ///
         /// <para>
-        ///   To decompress data, use the <see cref="Ionic.Zlib.DeflateStream"/> class.
+        ///   To decompress data, use the <see cref="DeflateStream"/> class.
         /// </para>
         ///
         /// </remarks>
@@ -1114,7 +1114,7 @@ namespace SharpCompress.Compressor.Deflate
             throw new NotImplementedException();
         }
 
-#region Nested type: TraceBits
+        #region Nested type: TraceBits
 
         [Flags]
         private enum TraceBits
@@ -1133,7 +1133,7 @@ namespace SharpCompress.Compressor.Deflate
             WriterThread = 1024, // writer thread
         }
 
-#endregion
+        #endregion
     }
 }
 #endif

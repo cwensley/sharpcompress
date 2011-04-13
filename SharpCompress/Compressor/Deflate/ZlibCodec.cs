@@ -78,7 +78,7 @@ namespace SharpCompress.Compressor.Deflate
     /// href="http://www.ietf.org/rfc/rfc1950.txt">RFC 1950 - ZLIB</see> and <see
     /// href="http://www.ietf.org/rfc/rfc1951.txt">RFC 1951 - DEFLATE</see>.
     /// </remarks>
-    public sealed class ZlibCodec
+    internal sealed class ZlibCodec
     {
         /// <summary>
         /// The buffer from which data is taken.

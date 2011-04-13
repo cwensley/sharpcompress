@@ -3,7 +3,7 @@ using SharpCompress.Common;
 using SharpCompress.Common.Rar;
 using SharpCompress.Common.Rar.Headers;
 
-namespace SharpCompress.Rar
+namespace SharpCompress.Reader.Rar
 {
     public class RarReaderEntry : RarEntry
     {

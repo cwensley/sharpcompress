@@ -3,7 +3,7 @@ using SharpCompress.IO;
 
 namespace SharpCompress.Common.Zip.Headers
 {
-    public class DirectoryEntryHeader : ZipHeader
+    internal class DirectoryEntryHeader : ZipHeader
     {
         public DirectoryEntryHeader()
             : base(ZipHeaderType.DirectoryEntry)

@@ -29,8 +29,7 @@ namespace SharpCompress.Common.Rar.Headers
 
         internal IEnumerable<RarHeader> ReadHeaders(Stream stream)
         {
-            bool checkForSFX = Options.HasFlag(ReaderOptions.CheckForSFX);
-            if (checkForSFX)
+            if (Options.HasFlag(ReaderOptions.CheckForSFX))
             {
                 RewindableStream rewindableStream = new RewindableStream(stream);
                 rewindableStream.Recording = true;

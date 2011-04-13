@@ -55,6 +55,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <NoWarn>1591</NoWarn>
+    <DocumentationFile>..\bin\SharpCompress.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -204,7 +205,7 @@
     <Compile Include="Common\Zip\Headers\ZipHeader.cs" />
     <Compile Include="Common\Zip\ZipHeaderFactory.cs" />
     <Compile Include="Reader\Zip\ZipReader.cs" />
-    <Compile Include="Reader\Zip\ZipReaderEntry.cs" />
+    <Compile Include="Common\Zip\ZipEntry.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

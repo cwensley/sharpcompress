@@ -1,16 +1,14 @@
 ﻿using System;
-using SharpCompress.Common;
-using SharpCompress.Common.Zip;
 
-namespace SharpCompress.Reader.Zip
+namespace SharpCompress.Common.Zip
 {
-    public class ZipReaderEntry : Entry
+    public class ZipEntry : Entry
     {
         private ZipFilePart filePart;
         private bool directory;
         private DateTime? lastModifiedTime;
 
-        internal ZipReaderEntry(ZipFilePart filePart)
+        internal ZipEntry(ZipFilePart filePart)
         {
             this.filePart = filePart;
             directory = filePart.Header.Name.EndsWith("/");
