@@ -406,6 +406,9 @@
     <Compile Include="..\SharpCompress\Reader\Rar\SingleVolumeRarReader.cs">
       <Link>Reader\Rar\SingleVolumeRarReader.cs</Link>
     </Compile>
+    <Compile Include="..\SharpCompress\Reader\ReaderType.cs">
+      <Link>Reader\ReaderType.cs</Link>
+    </Compile>
     <Compile Include="..\SharpCompress\Reader\Zip\ZipReader.cs">
       <Link>Reader\Zip\ZipReader.cs</Link>
     </Compile>

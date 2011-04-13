@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using SharpCompress.Common;
 using SharpCompress.IO;
 
 namespace SharpCompress.Common.Rar.Headers
@@ -31,9 +30,12 @@ namespace SharpCompress.Common.Rar.Headers
         internal IEnumerable<RarHeader> ReadHeaders(Stream stream)
         {
             bool checkForSFX = Options.HasFlag(ReaderOptions.CheckForSFX);
-            if ((StreamingMode == StreamingMode.Seekable) && checkForSFX)
+            if (checkForSFX)
             {
-                BinaryReader reader = new BinaryReader(stream);
+                RewindableStream rewindableStream = new RewindableStream(stream);
+                rewindableStream.Recording = true;
+                stream = rewindableStream;
+                BinaryReader reader = new BinaryReader(rewindableStream);
                 try
                 {
                     int count = 0;
@@ -48,7 +50,7 @@ namespace SharpCompress.Common.Rar.Headers
                                 && (nextThreeBytes[2] == 0x5E))
                             {
                                 //old format and isvalid
-                                stream.Position = stream.Position - 4;
+                                rewindableStream.Rewind();
                                 break;
                             }
                             byte[] secondThreeBytes = reader.ReadBytes(3);
@@ -60,7 +62,7 @@ namespace SharpCompress.Common.Rar.Headers
                                 && (secondThreeBytes[2] == 0x00))
                             {
                                 //new format and isvalid
-                                stream.Position = stream.Position - 7;
+                                rewindableStream.Rewind();
                                 break;
                             }
                         }

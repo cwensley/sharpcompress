@@ -23,6 +23,10 @@ namespace SharpCompress.Reader.Zip
             get { throw new NotImplementedException(); }
         }
 
+        public override ReaderType ReaderType
+        {
+            get { return ReaderType.Zip; }
+        }
 
         #region Open
         /// <summary>

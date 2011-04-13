@@ -14,7 +14,24 @@ namespace SharpCompress.Test
     {
         static void Main()
         {
-            TestZip();
+            TestRewind();
+        }
+
+        public static void TestRewind()
+        {
+            using (Stream stream = File.OpenRead(@"C:\Code\sharpcompress\TestArchives\sharpcompress.rar"))
+            {
+                var reader = CompressedStreamReader.OpenStream(stream);
+                while (reader.MoveToNextEntry())
+                {
+                    if (!reader.Entry.IsDirectory)
+                    {
+                        Console.WriteLine(reader.Entry.FilePath);
+                        reader.WriteEntryToDirectory(@"C:\temp",
+                                                     ExtractOptions.ExtractFullPath | ExtractOptions.Overwrite);
+                    }
+                }
+            }
         }
 
         public static void TestRar()

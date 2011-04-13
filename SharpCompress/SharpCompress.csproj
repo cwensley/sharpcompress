@@ -91,6 +91,7 @@
     <Compile Include="Common\Entry.cs" />
     <Compile Include="Compressor\Deflate\CrcCalculatorStream.cs" />
     <Compile Include="Compressor\Deflate\FlushType.cs" />
+    <Compile Include="IO\RewindableStream.cs" />
     <Compile Include="Reader\CompressedStreamReader.cs" />
     <Compile Include="Common\Volume.cs" />
     <Compile Include="Compressor\Deflate\CRC32.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Reader\Rar\RarReaderEntry.cs" />
     <Compile Include="Archive\Rar\SeekableStreamFilePart.cs" />
     <Compile Include="Reader\Rar\SingleVolumeRarReader.cs" />
+    <Compile Include="Reader\ReaderType.cs" />
     <Compile Include="VersionInfo.cs" />
     <Compile Include="Archive\Rar\FileInfoRarFilePart.cs" />
     <Compile Include="Archive\Rar\FileInfoRarArchiveVolume.cs" />

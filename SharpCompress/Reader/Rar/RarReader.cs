@@ -30,6 +30,11 @@ namespace SharpCompress.Reader.Rar
             get { return volume; }
         }
 
+        public override ReaderType ReaderType
+        {
+            get { return ReaderType.Rar; }
+        }
+
         #region Open
         /// <summary>
         /// Opens a RarReader for Non-seeking usage with a single volume
