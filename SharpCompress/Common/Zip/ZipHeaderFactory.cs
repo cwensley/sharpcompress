@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using SharpCompress.Common.Zip.Headers;
 using SharpCompress.IO;
@@ -58,9 +57,7 @@ namespace SharpCompress.Common.Zip
                             break;
                         case ZIP64_END_OF_CENTRAL_DIRECTORY:
                         default:
-                            {
-                                throw new InvalidOperationException();
-                            }
+                            break;
                     }
                 }
                 catch

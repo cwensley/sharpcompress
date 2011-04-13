@@ -92,6 +92,7 @@
     <Compile Include="Compressor\Deflate\CrcCalculatorStream.cs" />
     <Compile Include="Compressor\Deflate\FlushType.cs" />
     <Compile Include="IO\RewindableStream.cs" />
+    <Compile Include="Reader\CompressedStreamFactory.cs" />
     <Compile Include="Reader\CompressedStreamReader.cs" />
     <Compile Include="Common\Volume.cs" />
     <Compile Include="Compressor\Deflate\CRC32.cs" />

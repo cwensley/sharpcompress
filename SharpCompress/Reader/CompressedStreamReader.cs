@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using SharpCompress.Archive.Rar;
-using SharpCompress.Archive.Zip;
 using SharpCompress.Common;
-using SharpCompress.IO;
-using SharpCompress.Reader.Rar;
-using SharpCompress.Reader.Zip;
-
 #if THREEFIVE || PORTABLE
 using SharpCompress.Common.Rar.Headers;
 #endif
@@ -20,9 +14,9 @@ namespace SharpCompress.Reader
     public abstract class CompressedStreamReader : IDisposable
     {
         private readonly ReaderOptions options;
+        private bool completed;
         private IEnumerator<Entry> entriesForCurrentReadStream;
         private bool wroteCurrentEntry;
-        private bool completed;
 
         internal CompressedStreamReader(ReaderOptions options, IExtractionListener listener)
         {
@@ -33,11 +27,22 @@ namespace SharpCompress.Reader
 
         public abstract ReaderType ReaderType { get; }
 
-        protected IExtractionListener Listener
+        protected IExtractionListener Listener { get; private set; }
+
+        /// <summary>
+        /// Current volume that the current entry resides in
+        /// </summary>
+        public abstract Volume Volume { get; }
+
+        /// <summary>
+        /// Current file entry 
+        /// </summary>
+        public Entry Entry
         {
-            get;
-            private set;
+            get { return entriesForCurrentReadStream.Current; }
         }
+
+        #region IDisposable Members
 
         public void Dispose()
         {
@@ -51,24 +56,7 @@ namespace SharpCompress.Reader
             }
         }
 
-        /// <summary>
-        /// Current volume that the current entry resides in
-        /// </summary>
-        public abstract Volume Volume
-        {
-            get;
-        }
-
-        /// <summary>
-        /// Current file entry 
-        /// </summary>
-        public Entry Entry
-        {
-            get
-            {
-                return entriesForCurrentReadStream.Current;
-            }
-        }
+        #endregion
 
         /// <summary>
         /// Moves to the next entry by reading more data from the underlying stream.  This skips if data has not been read.
@@ -107,7 +95,8 @@ namespace SharpCompress.Reader
             if ((stream == null) || (!stream.CanRead))
             {
                 throw new MultipartStreamRequiredException("File is split into multiple archives: '"
-                    + Entry.FilePath + "'. A new readable stream is required.  Use Cancel if it was intended.");
+                                                           + Entry.FilePath +
+                                                           "'. A new readable stream is required.  Use Cancel if it was intended.");
             }
             entriesForCurrentReadStream = GetEntries(stream, options).GetEnumerator();
             if (!entriesForCurrentReadStream.MoveNext())
@@ -116,6 +105,7 @@ namespace SharpCompress.Reader
             }
             return true;
         }
+
         internal abstract IEnumerable<FilePart> CreateFilePartEnumerableForCurrentEntry();
         internal abstract Stream RequestInitialStream();
 
@@ -123,6 +113,8 @@ namespace SharpCompress.Reader
         {
             return entriesForCurrentReadStream.MoveNext();
         }
+
+        internal abstract IEnumerable<Entry> GetEntries(Stream stream, ReaderOptions options);
 
         #region Entry Skip/Write
 
@@ -155,51 +147,6 @@ namespace SharpCompress.Reader
 
         internal abstract void Write(IEnumerable<FilePart> parts, Stream writeStream);
 
-        #endregion
-
-        internal abstract IEnumerable<Entry> GetEntries(Stream stream, ReaderOptions options);
-
-
-        #region Open
-        /// <summary>
-        /// Opens a ZipReader for Non-seeking usage with a single volume
-        /// </summary>
-        /// <param name="stream"></param>
-        /// <param name="listener"></param>
-        /// <param name="options"></param>
-        /// <returns></returns>
-        public static CompressedStreamReader OpenStream(Stream stream, IExtractionListener listener,
-            ReaderOptions options = ReaderOptions.KeepStreamsOpen)
-        {
-            stream.CheckNotNull("stream");
-
-            RewindableStream rewindableStream = new RewindableStream(stream);
-            rewindableStream.Recording = true;
-            if (ZipArchive.IsZipFile(rewindableStream))
-            {
-                return ZipReader.Open(rewindableStream, listener, options);
-            }
-            rewindableStream.Rewind();
-            rewindableStream.Recording = true;
-            if (RarArchive.IsRarFile(rewindableStream))
-            {
-                rewindableStream.Rewind();
-                return RarReader.Open(rewindableStream, listener, options);
-            }
-            throw new InvalidOperationException("Cannot determine compressed stream type.");
-        }
-
-        /// <summary>
-        /// Opens a ZipReader for Non-seeking usage with a single volume
-        /// </summary>
-        /// <param name="stream"></param>
-        /// <param name="options"></param>
-        /// <returns></returns>
-        public static CompressedStreamReader OpenStream(Stream stream, ReaderOptions options = ReaderOptions.KeepStreamsOpen)
-        {
-            stream.CheckNotNull("stream");
-            return OpenStream(stream, new NullExtractionListener(), options);
-        }
         #endregion
     }
 }

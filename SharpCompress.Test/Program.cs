@@ -15,14 +15,14 @@ namespace SharpCompress.Test
         static void Main()
         {
             new RewindableStreamTest().Test();
-           // TestRewind();
+            TestRewind();
         }
 
         public static void TestRewind()
         {
             using (Stream stream = File.OpenRead(@"C:\Code\sharpcompress\TestArchives\sharpcompress.rar"))
             {
-                var reader = CompressedStreamReader.OpenStream(stream);
+                var reader = CompressedStreamFactory.OpenReader(stream);
                 while (reader.MoveToNextEntry())
                 {
                     if (!reader.Entry.IsDirectory)

@@ -67,6 +67,9 @@
     <Compile Include="..\SharpCompress\Archive\Rar\StreamRarArchiveVolume.cs">
       <Link>Archive\Rar\StreamRarArchiveVolume.cs</Link>
     </Compile>
+    <Compile Include="..\SharpCompress\Archive\Zip\ZipArchive.cs">
+      <Link>Archive\Zip\ZipArchive.cs</Link>
+    </Compile>
     <Compile Include="..\SharpCompress\Common\Entry.cs">
       <Link>Common\Entry.cs</Link>
     </Compile>
@@ -340,6 +343,9 @@
     <Compile Include="..\SharpCompress\IO\ReadOnlySubStream.cs">
       <Link>IO\ReadOnlySubStream.cs</Link>
     </Compile>
+    <Compile Include="..\SharpCompress\IO\RewindableStream.cs">
+      <Link>IO\RewindableStream.cs</Link>
+    </Compile>
     <Compile Include="..\SharpCompress\IO\StreamingMode.cs">
       <Link>IO\StreamingMode.cs</Link>
     </Compile>
@@ -348,6 +354,9 @@
     </Compile>
     <Compile Include="..\SharpCompress\NullExtractionListener.cs">
       <Link>NullExtractionListener.cs</Link>
+    </Compile>
+    <Compile Include="..\SharpCompress\Reader\CompressedStreamFactory.cs">
+      <Link>Reader\CompressedStreamFactory.cs</Link>
     </Compile>
     <Compile Include="..\SharpCompress\Reader\CompressedStreamReader.cs">
       <Link>Reader\CompressedStreamReader.cs</Link>
