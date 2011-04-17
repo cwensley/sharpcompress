@@ -9,13 +9,13 @@ namespace SharpCompress.Common.Rar.Headers
     {
         private int MAX_SFX_SIZE = 0x80000 - 16; //archive.cpp line 136
 
-        internal RarHeaderFactory(StreamingMode mode, ReaderOptions options)
+        internal RarHeaderFactory(StreamingMode mode, Options options)
         {
             StreamingMode = mode;
             Options = options;
         }
 
-        internal ReaderOptions Options
+        internal Options Options
         {
             get;
             private set;
@@ -29,7 +29,7 @@ namespace SharpCompress.Common.Rar.Headers
 
         internal IEnumerable<RarHeader> ReadHeaders(Stream stream)
         {
-            if (Options.HasFlag(ReaderOptions.CheckForSFX))
+            if (Options.HasFlag(Options.CheckForSFX))
             {
                 RewindableStream rewindableStream = new RewindableStream(stream);
                 rewindableStream.Recording = true;
@@ -73,7 +73,7 @@ namespace SharpCompress.Common.Rar.Headers
                 }
                 catch (Exception e)
                 {
-                    if (!Options.HasFlag(ReaderOptions.KeepStreamsOpen))
+                    if (!Options.HasFlag(Options.KeepStreamsOpen))
                     {
 #if THREEFIVE
                         reader.Close();

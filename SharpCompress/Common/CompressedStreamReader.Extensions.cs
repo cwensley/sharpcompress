@@ -1,22 +1,21 @@
 ﻿using System.IO;
-using SharpCompress.Common;
 #if THREEFIVE
 using SharpCompress.Common.Rar.Headers;
 #endif
 
-namespace SharpCompress.Reader
+namespace SharpCompress.Common
 {
     public static class CompressedStreamReaderExtensions
     {
 #if !PORTABLE
-        public static void WriteEntryTo(this CompressedStreamReader reader, string filePath)
+        public static void WriteEntryTo(this IReader reader, string filePath)
         {
             using (Stream stream = File.Open(filePath, FileMode.Create, FileAccess.Write))
             {
                 reader.WriteEntryTo(stream);
             }
         }
-        public static void WriteEntryTo(this CompressedStreamReader reader, FileInfo filePath)
+        public static void WriteEntryTo(this IReader reader, FileInfo filePath)
         {
             using (Stream stream = filePath.Open(FileMode.Create))
             {
@@ -27,7 +26,7 @@ namespace SharpCompress.Reader
         /// <summary>
         /// Extract to specific directory, retaining filename
         /// </summary>
-        public static void WriteEntryToDirectory(this CompressedStreamReader reader, string destinationDirectory,
+        public static void WriteEntryToDirectory(this IReader reader, string destinationDirectory,
             ExtractOptions options = ExtractOptions.Overwrite)
         {
             string destinationFileName = string.Empty;
@@ -55,7 +54,7 @@ namespace SharpCompress.Reader
         /// <summary>
         /// Extract to specific file
         /// </summary>
-        public static void WriteEntryToFile(this CompressedStreamReader reader, string destinationFileName,
+        public static void WriteEntryToFile(this IReader reader, string destinationFileName,
             ExtractOptions options = ExtractOptions.Overwrite)
         {
             FileMode fm = FileMode.Create;

@@ -453,21 +453,51 @@
     <Compile Include="Common\Zip\ZipEntry.cs" />
     <Compile Include="Common\Zip\ZipFilePart.cs" />
     <Compile Include="Common\Zip\ZipHeaderFactory.cs" />
-    <Compile Include="Compressor\Deflate\CRC32.cs" />
-    <Compile Include="Compressor\Deflate\CrcCalculatorStream.cs" />
-    <Compile Include="Compressor\Deflate\DeflateManager.cs" />
-    <Compile Include="Compressor\Deflate\DeflateStream.cs" />
-    <Compile Include="Compressor\Deflate\FlushType.cs" />
-    <Compile Include="Compressor\Deflate\GZipStream.cs" />
-    <Compile Include="Compressor\Deflate\Inflate.cs" />
-    <Compile Include="Compressor\Deflate\InfTree.cs" />
-    <Compile Include="Compressor\Deflate\ParallelDeflateOutputStream.cs" />
-    <Compile Include="Compressor\Deflate\Tree.cs" />
-    <Compile Include="Compressor\Deflate\Zlib.cs" />
-    <Compile Include="Compressor\Deflate\ZlibBaseStream.cs" />
-    <Compile Include="Compressor\Deflate\ZlibCodec.cs" />
-    <Compile Include="Compressor\Deflate\ZlibConstants.cs" />
-    <Compile Include="Compressor\Deflate\ZlibStream.cs" />
+    <Compile Include="Compressor\Deflate\CRC32.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Compressor\Deflate\CrcCalculatorStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Compressor\Deflate\DeflateManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Compressor\Deflate\DeflateStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Compressor\Deflate\FlushType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Compressor\Deflate\GZipStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Compressor\Deflate\Inflate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Compressor\Deflate\InfTree.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Compressor\Deflate\ParallelDeflateOutputStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Compressor\Deflate\Tree.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Compressor\Deflate\Zlib.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Compressor\Deflate\ZlibBaseStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Compressor\Deflate\ZlibCodec.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Compressor\Deflate\ZlibConstants.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Compressor\Deflate\ZlibStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Compressor\Rar\Decode\AudioVariables.cs" />
     <Compile Include="Compressor\Rar\Decode\BitDecode.cs" />
     <Compile Include="Compressor\Rar\Decode\CodeType.cs" />

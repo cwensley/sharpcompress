@@ -3,7 +3,7 @@
 namespace SharpCompress.Common
 {
     [Flags]
-    public enum ReaderOptions
+    public enum Options
     {
         /// <summary>
         /// No options specified

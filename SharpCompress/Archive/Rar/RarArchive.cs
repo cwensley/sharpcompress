@@ -8,26 +8,22 @@ using SharpCompress.IO;
 
 namespace SharpCompress.Archive.Rar
 {
-    public class RarArchive
+    public class RarArchive : CompressedArchive<RarArchiveEntry, RarArchiveVolume>
     {
-        private LazyReadOnlyCollection<RarArchiveVolume> lazyVolumes;
-        private LazyReadOnlyCollection<RarArchiveEntry> lazyEntries;
-
-
 #if !PORTABLE
         /// <summary>
         /// Constructor with a FileInfo object to an existing file.
         /// </summary>
         /// <param name="fileInfo"></param>
         /// <param name="options"></param>
-        internal RarArchive(FileInfo fileInfo, ReaderOptions options)
+        internal RarArchive(FileInfo fileInfo, Options options)
+            : base(fileInfo, options)
         {
-            if (!fileInfo.Exists)
-            {
-                throw new ArgumentException("File does not exist: " + fileInfo.FullName);
-            }
-            lazyVolumes = new LazyReadOnlyCollection<RarArchiveVolume>(RarArchiveVolumeFactory.GetParts(fileInfo, options));
-            lazyEntries = new LazyReadOnlyCollection<RarArchiveEntry>(RarArchiveEntry.GetEntries(this, Volumes));
+        }
+
+        protected override IEnumerable<RarArchiveVolume> LoadVolumes(FileInfo file, Options options)
+        {
+            return RarArchiveVolumeFactory.GetParts(file, options);
         }
 #endif
 
@@ -36,54 +32,20 @@ namespace SharpCompress.Archive.Rar
         /// </summary>
         /// <param name="streams"></param>
         /// <param name="options"></param>
-        internal RarArchive(IEnumerable<Stream> streams, ReaderOptions options)
+        internal RarArchive(IEnumerable<Stream> streams, Options options)
+            : base(streams, options)
         {
-            lazyVolumes = new LazyReadOnlyCollection<RarArchiveVolume>(RarArchiveVolumeFactory.GetParts(streams, options));
-            lazyEntries = new LazyReadOnlyCollection<RarArchiveEntry>(RarArchiveEntry.GetEntries(this, Volumes));
         }
 
-        /// <summary>
-        /// Returns an ReadOnlyCollection of all the RarArchiveEntries across the one or many parts of the RarArchive.
-        /// </summary>
-        /// <returns></returns>
-        public ICollection<RarArchiveEntry> Entries
+        protected override IEnumerable<RarArchiveEntry> LoadEntries(IEnumerable<RarArchiveVolume> volumes)
         {
-            get
-            {
-                return lazyEntries;
-            }
+            return RarArchiveEntryFactory.GetEntries(this, volumes);
         }
 
-        /// <summary>
-        /// Returns an ReadOnlyCollection of all the RarArchiveVolumes across the one or many parts of the RarArchive.
-        /// </summary>
-        /// <returns></returns>
-        public ICollection<RarArchiveVolume> Volumes
+        protected override IEnumerable<RarArchiveVolume> LoadVolumes(IEnumerable<Stream> streams, Options options)
         {
-            get
-            {
-                return lazyVolumes;
-            }
+            return RarArchiveVolumeFactory.GetParts(streams, options);
         }
-
-        /// <summary>
-        /// The total size of the files compressed in the archive.
-        /// </summary>
-        public long TotalSize
-        {
-            get
-            {
-                return Entries.Aggregate(0L, (total, cf) => total + cf.CompressedSize);
-            }
-        }
-
-        #region Internal
-        internal Stream StreamData
-        {
-            get;
-            private set;
-        }
-        #endregion
 
         #region Creation
 
@@ -94,7 +56,7 @@ namespace SharpCompress.Archive.Rar
         /// <param name="filePath"></param>
         public static RarArchive Open(string filePath)
         {
-            return Open(filePath, ReaderOptions.None);
+            return Open(filePath, Options.None);
         }
 
         /// <summary>
@@ -103,7 +65,7 @@ namespace SharpCompress.Archive.Rar
         /// <param name="fileInfo"></param>
         public static RarArchive Open(FileInfo fileInfo)
         {
-            return Open(fileInfo, ReaderOptions.None);
+            return Open(fileInfo, Options.None);
         }
 
         /// <summary>
@@ -111,7 +73,7 @@ namespace SharpCompress.Archive.Rar
         /// </summary>
         /// <param name="filePath"></param>
         /// <param name="options"></param>
-        public static RarArchive Open(string filePath, ReaderOptions options)
+        public static RarArchive Open(string filePath, Options options)
         {
             filePath.CheckNotNullOrEmpty("filePath");
             return Open(new FileInfo(filePath), options);
@@ -122,7 +84,7 @@ namespace SharpCompress.Archive.Rar
         /// </summary>
         /// <param name="fileInfo"></param>
         /// <param name="options"></param>
-        public static RarArchive Open(FileInfo fileInfo, ReaderOptions options)
+        public static RarArchive Open(FileInfo fileInfo, Options options)
         {
             fileInfo.CheckNotNull("fileInfo");
             return new RarArchive(fileInfo, options);
@@ -143,7 +105,7 @@ namespace SharpCompress.Archive.Rar
         /// </summary>
         /// <param name="stream"></param>
         /// <param name="options"></param>
-        public static RarArchive Open(Stream stream, ReaderOptions options)
+        public static RarArchive Open(Stream stream, Options options)
         {
             stream.CheckNotNull("stream");
             return Open(stream.AsEnumerable(), options);
@@ -156,7 +118,7 @@ namespace SharpCompress.Archive.Rar
         public static RarArchive Open(IEnumerable<Stream> streams)
         {
             streams.CheckNotNull("streams");
-            return new RarArchive(streams, ReaderOptions.KeepStreamsOpen);
+            return new RarArchive(streams, Options.KeepStreamsOpen);
         }
 
         /// <summary>
@@ -164,7 +126,7 @@ namespace SharpCompress.Archive.Rar
         /// </summary>
         /// <param name="streams"></param>
         /// <param name="options"></param>
-        public static RarArchive Open(IEnumerable<Stream> streams, ReaderOptions options)
+        public static RarArchive Open(IEnumerable<Stream> streams, Options options)
         {
             streams.CheckNotNull("streams");
             return new RarArchive(streams, options);
@@ -206,7 +168,7 @@ namespace SharpCompress.Archive.Rar
             try
             {
 
-                RarHeaderFactory headerFactory = new RarHeaderFactory(StreamingMode.Seekable, ReaderOptions.CheckForSFX);
+                RarHeaderFactory headerFactory = new RarHeaderFactory(StreamingMode.Seekable, Options.CheckForSFX);
                 RarHeader header = headerFactory.ReadHeaders(stream).FirstOrDefault();
                 if (header == null)
                 {

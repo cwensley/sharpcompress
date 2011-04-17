@@ -1,5 +1,5 @@
 ﻿
-namespace SharpCompress.Reader
+namespace SharpCompress.Common
 {
     public enum ReaderType
     {

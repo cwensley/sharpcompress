@@ -8,11 +8,11 @@ using SharpCompress.Common.Zip.Headers;
 
 namespace SharpCompress.Reader.Zip
 {
-    public class ZipReader : CompressedStreamReader
+    public class ZipReader : CompressedStreamReader<ZipEntry, Volume>
     {
         private readonly Stream stream;
 
-        internal ZipReader(Stream stream, ReaderOptions options, IExtractionListener listener)
+        internal ZipReader(Stream stream, Options options, IExtractionListener listener)
             : base(options, listener)
         {
             this.stream = stream;
@@ -20,12 +20,18 @@ namespace SharpCompress.Reader.Zip
 
         public override Volume Volume
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public override ReaderType ReaderType
         {
-            get { return ReaderType.Zip; }
+            get
+            {
+                return ReaderType.Zip;
+            }
         }
 
         #region Open
@@ -37,7 +43,7 @@ namespace SharpCompress.Reader.Zip
         /// <param name="options"></param>
         /// <returns></returns>
         public static ZipReader Open(Stream stream, IExtractionListener listener,
-            ReaderOptions options = ReaderOptions.KeepStreamsOpen)
+            Options options = Options.KeepStreamsOpen)
         {
             stream.CheckNotNull("stream");
             return new ZipReader(stream, options, listener);
@@ -49,7 +55,7 @@ namespace SharpCompress.Reader.Zip
         /// <param name="stream"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public static ZipReader Open(Stream stream, ReaderOptions options = ReaderOptions.KeepStreamsOpen)
+        public static ZipReader Open(Stream stream, Options options = Options.KeepStreamsOpen)
         {
             stream.CheckNotNull("stream");
             return Open(stream, new NullExtractionListener(), options);
@@ -85,7 +91,7 @@ namespace SharpCompress.Reader.Zip
             }
         }
 
-        internal override IEnumerable<Common.Entry> GetEntries(Stream stream, Common.ReaderOptions options)
+        internal override IEnumerable<ZipEntry> GetEntries(Stream stream, Common.Options options)
         {
             foreach (var h in ZipHeaderFactory.ReadHeaderNonseekable(stream))
             {

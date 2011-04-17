@@ -12,7 +12,7 @@ namespace SharpCompress.Archive.Rar
 {
     internal static class RarArchiveVolumeFactory
     {
-        internal static IEnumerable<RarArchiveVolume> GetParts(IEnumerable<Stream> streams, ReaderOptions options)
+        internal static IEnumerable<RarArchiveVolume> GetParts(IEnumerable<Stream> streams, Options options)
         {
             foreach (Stream s in streams)
             {
@@ -26,7 +26,7 @@ namespace SharpCompress.Archive.Rar
         }
 
 #if !PORTABLE
-        internal static IEnumerable<RarArchiveVolume> GetParts(FileInfo fileInfo, ReaderOptions options)
+        internal static IEnumerable<RarArchiveVolume> GetParts(FileInfo fileInfo, Options options)
         {
             FileInfoRarArchiveVolume part = new FileInfoRarArchiveVolume(fileInfo, options);
             yield return part;

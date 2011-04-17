@@ -11,9 +11,9 @@ namespace SharpCompress.Common.Rar
     public abstract class RarVolume : Volume
     {
         private RarHeaderFactory headerFactory;
-        private ReaderOptions options;
+        private Options options;
 
-        internal RarVolume(StreamingMode mode, ReaderOptions options)
+        internal RarVolume(StreamingMode mode, Options options)
         {
             this.options = options;
             headerFactory = new RarHeaderFactory(mode, options);
@@ -57,7 +57,7 @@ namespace SharpCompress.Common.Rar
                                 RarFilePart fp = CreateFilePart(fh, previousMarkHeader);
                                 yield return fp;
                             }
-                            else if (options.HasFlag(ReaderOptions.GiveDirectoryEntries))
+                            else if (options.HasFlag(Options.GiveDirectoryEntries))
                             {
                                 RarFilePart fp = CreateFilePart(fh, previousMarkHeader);
                                 yield return fp;

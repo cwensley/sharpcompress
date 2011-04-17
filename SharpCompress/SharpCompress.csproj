@@ -84,17 +84,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\CompressedArchive.cs" />
+    <Compile Include="Archive\Rar\RarArchiveEntryFactory.cs" />
+    <Compile Include="Common\IArchive.cs" />
     <Compile Include="Archive\Rar\RarArchiveVolume.cs" />
     <Compile Include="Archive\Rar\StreamRarArchiveVolume.cs" />
     <Compile Include="Archive\Zip\ZipArchive.cs" />
     <Compile Include="Common\ExtractOptions.cs" />
     <Compile Include="Common\FilePart.cs" />
     <Compile Include="Common\Entry.cs" />
+    <Compile Include="Common\IEntry.cs" />
+    <Compile Include="Common\IVolume.cs" />
     <Compile Include="Compressor\Deflate\CrcCalculatorStream.cs" />
     <Compile Include="Compressor\Deflate\FlushType.cs" />
     <Compile Include="IO\RewindableStream.cs" />
-    <Compile Include="Reader\CompressedStreamFactory.cs" />
-    <Compile Include="Reader\CompressedStreamReader.cs" />
+    <Compile Include="Common\CompressedStreamFactory.cs" />
+    <Compile Include="Common\CompressedStreamReader.cs" />
     <Compile Include="Common\Volume.cs" />
     <Compile Include="Compressor\Deflate\CRC32.cs" />
     <Compile Include="Compressor\Deflate\DeflateManager.cs" />
@@ -125,14 +130,15 @@
     <Compile Include="Archive\Rar\RarArchiveEntry.cs" />
     <Compile Include="Exceptions\RarExtractionException.cs" />
     <Compile Include="Common\Rar\RarEntry.cs" />
-    <Compile Include="Common\ReaderOptions.cs" />
+    <Compile Include="Common\Options.cs" />
+    <Compile Include="Common\IReader.cs" />
     <Compile Include="Reader\Rar\MultiVolumeRarReader.cs" />
     <Compile Include="Reader\Rar\RarReader.cs" />
-    <Compile Include="Reader\CompressedStreamReader.Extensions.cs" />
+    <Compile Include="Common\CompressedStreamReader.Extensions.cs" />
     <Compile Include="Reader\Rar\RarReaderEntry.cs" />
     <Compile Include="Archive\Rar\SeekableStreamFilePart.cs" />
     <Compile Include="Reader\Rar\SingleVolumeRarReader.cs" />
-    <Compile Include="Reader\ReaderType.cs" />
+    <Compile Include="Common\ReaderType.cs" />
     <Compile Include="VersionInfo.cs" />
     <Compile Include="Archive\Rar\FileInfoRarFilePart.cs" />
     <Compile Include="Archive\Rar\FileInfoRarArchiveVolume.cs" />

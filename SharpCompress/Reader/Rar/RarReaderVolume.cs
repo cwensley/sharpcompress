@@ -12,11 +12,11 @@ namespace SharpCompress.Reader.Rar
         private bool streamOwner;
         private Stream stream;
 
-        internal RarReaderVolume(Stream stream, ReaderOptions options)
+        internal RarReaderVolume(Stream stream, Options options)
             : base(StreamingMode.Streaming, options)
         {
             this.stream = stream;
-            this.streamOwner = !options.HasFlag(ReaderOptions.KeepStreamsOpen);
+            this.streamOwner = !options.HasFlag(Options.KeepStreamsOpen);
         }
 
         internal override Stream Stream

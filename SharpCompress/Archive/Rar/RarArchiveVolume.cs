@@ -7,7 +7,7 @@ namespace SharpCompress.Archive.Rar
 {
     public abstract class RarArchiveVolume : RarVolume
     {
-        internal RarArchiveVolume(StreamingMode mode, ReaderOptions options)
+        internal RarArchiveVolume(StreamingMode mode, Options options)
             : base(mode, options)
         {
         }

@@ -9,7 +9,7 @@ namespace SharpCompress.Reader.Rar
     {
         private readonly Stream stream;
 
-        internal SingleVolumeRarReader(Stream stream, ReaderOptions options, IExtractionListener listener)
+        internal SingleVolumeRarReader(Stream stream, Options options, IExtractionListener listener)
             : base(options, listener)
         {
             this.stream = stream;

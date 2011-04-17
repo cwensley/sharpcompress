@@ -13,25 +13,31 @@ namespace SharpCompress.Reader.Rar
     /// <summary>
     /// This class faciliates Reading a Rar Archive in a non-seekable forward-only manner
     /// </summary>
-    public abstract class RarReader : CompressedStreamReader
+    public abstract class RarReader : CompressedStreamReader<RarReaderEntry, RarVolume>
     {
         private RarVolume volume;
 
-        internal RarReader(ReaderOptions options, IExtractionListener listener)
+        internal RarReader(Options options, IExtractionListener listener)
             : base(options, listener)
         {
         }
 
         internal abstract void ValidateArchive(RarVolume archive);
 
-        public override Volume Volume
+        public override RarVolume Volume
         {
-            get { return volume; }
+            get
+            {
+                return volume;
+            }
         }
 
         public override ReaderType ReaderType
         {
-            get { return ReaderType.Rar; }
+            get
+            {
+                return ReaderType.Rar;
+            }
         }
 
         #region Open
@@ -43,7 +49,7 @@ namespace SharpCompress.Reader.Rar
         /// <param name="options"></param>
         /// <returns></returns>
         public static RarReader Open(Stream stream, IExtractionListener listener,
-            ReaderOptions options = ReaderOptions.KeepStreamsOpen)
+            Options options = Options.KeepStreamsOpen)
         {
             stream.CheckNotNull("stream");
             return new SingleVolumeRarReader(stream, options, listener);
@@ -55,7 +61,7 @@ namespace SharpCompress.Reader.Rar
         /// <param name="stream"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public static RarReader Open(Stream stream, ReaderOptions options = ReaderOptions.KeepStreamsOpen)
+        public static RarReader Open(Stream stream, Options options = Options.KeepStreamsOpen)
         {
             stream.CheckNotNull("stream");
             return new SingleVolumeRarReader(stream, options, new NullExtractionListener());
@@ -69,7 +75,7 @@ namespace SharpCompress.Reader.Rar
         /// <param name="options"></param>
         /// <returns></returns>
         public static RarReader Open(IEnumerable<Stream> streams, IExtractionListener listener,
-            ReaderOptions options = ReaderOptions.KeepStreamsOpen)
+            Options options = Options.KeepStreamsOpen)
         {
             streams.CheckNotNull("streams");
             return new MultiVolumeRarReader(streams, options, listener);
@@ -81,14 +87,14 @@ namespace SharpCompress.Reader.Rar
         /// <param name="streams"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public static RarReader Open(IEnumerable<Stream> streams, ReaderOptions options = ReaderOptions.KeepStreamsOpen)
+        public static RarReader Open(IEnumerable<Stream> streams, Options options = Options.KeepStreamsOpen)
         {
             streams.CheckNotNull("streams");
             return new MultiVolumeRarReader(streams, options, new NullExtractionListener());
         }
         #endregion
 
-        internal override IEnumerable<Entry> GetEntries(Stream stream, ReaderOptions options)
+        internal override IEnumerable<RarReaderEntry> GetEntries(Stream stream, Options options)
         {
             volume = new RarReaderVolume(stream, options);
             foreach (RarFilePart fp in volume.ReadFileParts())

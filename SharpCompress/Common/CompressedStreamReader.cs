@@ -1,45 +1,59 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using SharpCompress.Common;
 #if THREEFIVE || PORTABLE
 using SharpCompress.Common.Rar.Headers;
 #endif
 
-namespace SharpCompress.Reader
+namespace SharpCompress.Common
 {
     /// <summary>
     /// A generic push reader that reads unseekable comrpessed streams.
     /// </summary>
-    public abstract class CompressedStreamReader : IDisposable
+    public abstract class CompressedStreamReader<TEntry, TVolume> : IDisposable, IReader
+        where TEntry : Entry
+        where TVolume : Volume
     {
-        private readonly ReaderOptions options;
+        private readonly Options options;
         private bool completed;
-        private IEnumerator<Entry> entriesForCurrentReadStream;
+        private IEnumerator<TEntry> entriesForCurrentReadStream;
         private bool wroteCurrentEntry;
 
-        internal CompressedStreamReader(ReaderOptions options, IExtractionListener listener)
+        internal CompressedStreamReader(Options options, IExtractionListener listener)
         {
             Listener = listener;
             this.options = options;
             listener.CheckNotNull("listener");
         }
 
-        public abstract ReaderType ReaderType { get; }
+        public abstract ReaderType ReaderType
+        {
+            get;
+        }
 
-        protected IExtractionListener Listener { get; private set; }
+        protected IExtractionListener Listener
+        {
+            get;
+            private set;
+        }
 
         /// <summary>
         /// Current volume that the current entry resides in
         /// </summary>
-        public abstract Volume Volume { get; }
+        public abstract TVolume Volume
+        {
+            get;
+        }
 
         /// <summary>
         /// Current file entry 
         /// </summary>
-        public Entry Entry
+        public TEntry Entry
         {
-            get { return entriesForCurrentReadStream.Current; }
+            get
+            {
+                return entriesForCurrentReadStream.Current;
+            }
         }
 
         #region IDisposable Members
@@ -50,7 +64,7 @@ namespace SharpCompress.Reader
             {
                 entriesForCurrentReadStream.Dispose();
             }
-            if (Volume.Stream != null && !options.HasFlag(ReaderOptions.KeepStreamsOpen))
+            if (Volume.Stream != null && !options.HasFlag(Options.KeepStreamsOpen))
             {
                 Volume.Stream.Dispose();
             }
@@ -114,7 +128,7 @@ namespace SharpCompress.Reader
             return entriesForCurrentReadStream.MoveNext();
         }
 
-        internal abstract IEnumerable<Entry> GetEntries(Stream stream, ReaderOptions options);
+        internal abstract IEnumerable<TEntry> GetEntries(Stream stream, Options options);
 
         #region Entry Skip/Write
 
@@ -148,5 +162,13 @@ namespace SharpCompress.Reader
         internal abstract void Write(IEnumerable<FilePart> parts, Stream writeStream);
 
         #endregion
+
+        IEntry IReader.Entry
+        {
+            get
+            {
+                return Entry;
+            }
+        }
     }
 }
