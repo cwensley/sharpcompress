@@ -48,6 +48,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Archive\AbstractArchive.cs" />
+    <Compile Include="Archive\IArchive.cs" />
     <Compile Include="Archive\Rar\FileInfoRarArchiveVolume.cs" />
     <Compile Include="Archive\Rar\FileInfoRarFilePart.cs" />
     <Compile Include="Archive\Rar\RarArchive.cs" />
@@ -61,17 +63,11 @@
     <Compile Include="Archive\Rar\StreamRarArchiveVolume.cs" />
     <Compile Include="Archive\Zip\ZipArchive.cs" />
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Common\CompressedArchive.cs" />
-    <Compile Include="Common\CompressedStreamFactory.cs" />
-    <Compile Include="Common\CompressedStreamReader.cs" />
-    <Compile Include="Common\CompressedStreamReader.Extensions.cs" />
     <Compile Include="Common\Entry.cs" />
     <Compile Include="Common\ExtractOptions.cs" />
     <Compile Include="Common\FilePart.cs" />
-    <Compile Include="Common\IArchive.cs" />
     <Compile Include="Common\IEntry.cs" />
     <Compile Include="Common\IExtractionListener.cs" />
-    <Compile Include="Common\IReader.cs" />
     <Compile Include="Common\IVolume.cs" />
     <Compile Include="Common\Options.cs" />
     <Compile Include="Common\Rar\Headers\ArchiveHeader.cs" />
@@ -167,12 +163,16 @@
     <Compile Include="IO\StreamingMode.cs" />
     <Compile Include="LazyReadOnlyCollection.cs" />
     <Compile Include="NullExtractionListener.cs" />
+    <Compile Include="Reader\AbstractReader.cs" />
+    <Compile Include="Reader\IReader.cs" />
+    <Compile Include="Reader\IReader.Extensions.cs" />
     <Compile Include="Reader\Rar\MultiVolumeRarReader.cs" />
     <Compile Include="Reader\Rar\NonSeekableStreamFilePart.cs" />
     <Compile Include="Reader\Rar\RarReader.cs" />
     <Compile Include="Reader\Rar\RarReaderEntry.cs" />
     <Compile Include="Reader\Rar\RarReaderVolume.cs" />
     <Compile Include="Reader\Rar\SingleVolumeRarReader.cs" />
+    <Compile Include="Reader\ReaderFactory.cs" />
     <Compile Include="Reader\Zip\ZipReader.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="VersionInfo.cs" />

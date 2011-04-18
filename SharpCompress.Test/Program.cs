@@ -22,7 +22,7 @@ namespace SharpCompress.Test
         {
             using (Stream stream = File.OpenRead(@"C:\Code\sharpcompress\TestArchives\sharpcompress.rar"))
             {
-                var reader = CompressedStreamFactory.OpenReader(stream);
+                var reader = ReaderFactory.OpenReader(stream);
                 while (reader.MoveToNextEntry())
                 {
                     if (!reader.Entry.IsDirectory)

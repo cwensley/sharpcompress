@@ -1,6 +1,7 @@
 ﻿using System.IO;
+using SharpCompress.Common;
 
-namespace SharpCompress.Common
+namespace SharpCompress.Reader
 {
     public interface IReader
     {

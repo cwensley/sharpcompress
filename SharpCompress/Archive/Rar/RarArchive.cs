@@ -8,7 +8,7 @@ using SharpCompress.IO;
 
 namespace SharpCompress.Archive.Rar
 {
-    public class RarArchive : CompressedArchive<RarArchiveEntry, RarArchiveVolume>
+    public class RarArchive : AbstractArchive<RarArchiveEntry, RarArchiveVolume>
     {
 #if !PORTABLE
         /// <summary>

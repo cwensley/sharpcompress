@@ -8,7 +8,7 @@ using SharpCompress.Common.Zip.Headers;
 
 namespace SharpCompress.Reader.Zip
 {
-    public class ZipReader : CompressedStreamReader<ZipEntry, Volume>
+    public class ZipReader : AbstractReader<ZipEntry, Volume>
     {
         private readonly Stream stream;
 

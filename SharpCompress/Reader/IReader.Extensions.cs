@@ -1,11 +1,12 @@
 ﻿using System.IO;
+using SharpCompress.Common;
 #if THREEFIVE
 using SharpCompress.Common.Rar.Headers;
 #endif
 
-namespace SharpCompress.Common
+namespace SharpCompress.Reader
 {
-    public static class CompressedStreamReaderExtensions
+    public static class IReaderExtensions
     {
 #if !PORTABLE
         public static void WriteEntryTo(this IReader reader, string filePath)

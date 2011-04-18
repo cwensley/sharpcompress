@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using SharpCompress.Common;
 #if THREEFIVE || PORTABLE
 using SharpCompress.Common.Rar.Headers;
 #endif
 
-namespace SharpCompress.Common
+namespace SharpCompress.Reader
 {
     /// <summary>
     /// A generic push reader that reads unseekable comrpessed streams.
     /// </summary>
-    public abstract class CompressedStreamReader<TEntry, TVolume> : IDisposable, IReader
+    public abstract class AbstractReader<TEntry, TVolume> : IDisposable, IReader
         where TEntry : Entry
         where TVolume : Volume
     {
@@ -19,7 +20,7 @@ namespace SharpCompress.Common
         private IEnumerator<TEntry> entriesForCurrentReadStream;
         private bool wroteCurrentEntry;
 
-        internal CompressedStreamReader(Options options, IExtractionListener listener)
+        internal AbstractReader(Options options, IExtractionListener listener)
         {
             Listener = listener;
             this.options = options;

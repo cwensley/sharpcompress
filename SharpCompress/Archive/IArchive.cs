@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using SharpCompress.Common;
 
-namespace SharpCompress.Common
+namespace SharpCompress.Archive
 {
     public interface IArchive
     {

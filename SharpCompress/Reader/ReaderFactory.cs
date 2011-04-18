@@ -2,16 +2,17 @@
 using System.IO;
 using SharpCompress.Archive.Rar;
 using SharpCompress.Archive.Zip;
+using SharpCompress.Common;
 using SharpCompress.IO;
 using SharpCompress.Reader.Rar;
 using SharpCompress.Reader.Zip;
 
-namespace SharpCompress.Common
+namespace SharpCompress.Reader
 {
-    public static class CompressedStreamFactory
+    public static class ReaderFactory
     {
         /// <summary>
-        /// Opens a CompressedStreamReader for Non-seeking usage
+        /// Opens a Reader for Non-seeking usage
         /// </summary>
         /// <param name="stream"></param>
         /// <param name="listener"></param>

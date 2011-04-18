@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using SharpCompress.Common;
 
-namespace SharpCompress.Common
+namespace SharpCompress.Archive
 {
-    public abstract class CompressedArchive<TEntry, TVolume>
+    public abstract class AbstractArchive<TEntry, TVolume>
         where TEntry : Entry
         where TVolume : Volume
     {
@@ -19,7 +20,7 @@ namespace SharpCompress.Common
         /// </summary>
         /// <param name="fileInfo"></param>
         /// <param name="options"></param>
-        internal CompressedArchive(FileInfo fileInfo, Options options)
+        internal AbstractArchive(FileInfo fileInfo, Options options)
         {
             if (!fileInfo.Exists)
             {
@@ -39,7 +40,7 @@ namespace SharpCompress.Common
         /// </summary>
         /// <param name="streams"></param>
         /// <param name="options"></param>
-        internal CompressedArchive(IEnumerable<Stream> streams, Options options)
+        internal AbstractArchive(IEnumerable<Stream> streams, Options options)
         {
             lazyVolumes = new LazyReadOnlyCollection<TVolume>(LoadVolumes(streams, options));
             lazyEntries = new LazyReadOnlyCollection<TEntry>(LoadEntries(Volumes));
