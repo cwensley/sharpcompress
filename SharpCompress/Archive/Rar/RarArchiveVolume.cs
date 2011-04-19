@@ -11,15 +11,5 @@ namespace SharpCompress.Archive.Rar
             : base(mode, options)
         {
         }
-
-#if !PORTABLE
-        /// <summary>
-        /// File that backs this volume, if it not stream based
-        /// </summary>
-        public abstract FileInfo VolumeFile
-        {
-            get;
-        }
-#endif
     }
 }

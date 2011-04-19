@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using SharpCompress.Common;
@@ -10,19 +9,19 @@ namespace SharpCompress.Reader.Zip
 {
     public class ZipReader : AbstractReader<ZipEntry, Volume>
     {
-        private readonly Stream stream;
+        private readonly ZipVolume volume;
 
         internal ZipReader(Stream stream, Options options, IExtractionListener listener)
             : base(options, listener)
         {
-            this.stream = stream;
+            this.volume = new ZipVolume(stream, options);
         }
 
         public override Volume Volume
         {
             get
             {
-                throw new NotImplementedException();
+                return volume;
             }
         }
 
@@ -69,7 +68,7 @@ namespace SharpCompress.Reader.Zip
 
         internal override Stream RequestInitialStream()
         {
-            return stream;
+            return Volume.Stream;
         }
 
         internal override void Skip(IEnumerable<Common.FilePart> parts)

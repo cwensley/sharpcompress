@@ -21,7 +21,10 @@ namespace SharpCompress.Reader.Rar
 
         internal override Stream Stream
         {
-            get { return stream; }
+            get
+            {
+                return stream;
+            }
         }
 
         internal override RarFilePart CreateFilePart(FileHeader fileHeader, MarkHeader markHeader)
@@ -33,5 +36,16 @@ namespace SharpCompress.Reader.Rar
         {
             return GetVolumeFileParts();
         }
+
+
+#if !PORTABLE
+        public override FileInfo VolumeFile
+        {
+            get
+            {
+                return null;
+            }
+        }
+#endif
     }
 }

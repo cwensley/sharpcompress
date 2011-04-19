@@ -95,6 +95,7 @@
     <Compile Include="Common\Entry.cs" />
     <Compile Include="Common\IEntry.cs" />
     <Compile Include="Common\IVolume.cs" />
+    <Compile Include="Common\Zip\ZipVolume.cs" />
     <Compile Include="Compressor\Deflate\CrcCalculatorStream.cs" />
     <Compile Include="Compressor\Deflate\FlushType.cs" />
     <Compile Include="IO\RewindableStream.cs" />
