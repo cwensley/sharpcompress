@@ -2,7 +2,7 @@
 
 namespace SharpCompress.IO
 {
-    public class RewindableStream : Stream
+    internal class RewindableStream : Stream
     {
         private readonly Stream stream;
         private readonly MemoryStream bufferStream = new MemoryStream();

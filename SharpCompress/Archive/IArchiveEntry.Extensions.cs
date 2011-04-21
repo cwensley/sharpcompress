@@ -7,7 +7,7 @@ using SharpCompress.Common.Rar.Headers;
 namespace SharpCompress.Archive
 {
 
-    public static class RarArchiveEntryExtensions
+    public static class IArchiveEntryExtensions
     {
 #if !PORTABLE
         /// <summary>

@@ -74,7 +74,7 @@ namespace SharpCompress.Test
             }
             using (Stream stream = File.OpenRead(@"C:\Code\sharpcompress\TestArchives\sharpcompress.zip"))
             {
-                var archive = ArchiveFactory.OpenArchive(stream);
+                var archive = ArchiveFactory.Open(stream);
                 foreach (var entry in archive.Entries)
                 {
                     if (!entry.IsDirectory)
