@@ -14,26 +14,21 @@ namespace SharpCompress.Reader.Zip
         internal ZipReader(Stream stream, Options options, IExtractionListener listener)
             : base(options, listener)
         {
-            this.volume = new ZipVolume(stream, options);
+            volume = new ZipVolume(stream, options);
         }
 
         public override Volume Volume
         {
-            get
-            {
-                return volume;
-            }
+            get { return volume; }
         }
 
         public override ReaderType ReaderType
         {
-            get
-            {
-                return ReaderType.Zip;
-            }
+            get { return ReaderType.Zip; }
         }
 
         #region Open
+
         /// <summary>
         /// Opens a ZipReader for Non-seeking usage with a single volume
         /// </summary>
@@ -42,7 +37,7 @@ namespace SharpCompress.Reader.Zip
         /// <param name="options"></param>
         /// <returns></returns>
         public static ZipReader Open(Stream stream, IExtractionListener listener,
-            Options options = Options.KeepStreamsOpen)
+                                     Options options = Options.KeepStreamsOpen)
         {
             stream.CheckNotNull("stream");
             return new ZipReader(stream, options, listener);
@@ -59,6 +54,7 @@ namespace SharpCompress.Reader.Zip
             stream.CheckNotNull("stream");
             return Open(stream, new NullExtractionListener(), options);
         }
+
         #endregion
 
         internal override IEnumerable<FilePart> CreateFilePartEnumerableForCurrentEntry()
@@ -71,9 +67,9 @@ namespace SharpCompress.Reader.Zip
             return Volume.Stream;
         }
 
-        internal override void Skip(IEnumerable<Common.FilePart> parts)
+        internal override void Skip(IEnumerable<FilePart> parts)
         {
-            byte[] buffer = new byte[4096];
+            var buffer = new byte[4096];
             using (Stream s = parts.First().GetStream())
             {
                 while (s.Read(buffer, 0, buffer.Length) > 0)
@@ -82,7 +78,7 @@ namespace SharpCompress.Reader.Zip
             }
         }
 
-        internal override void Write(IEnumerable<Common.FilePart> parts, Stream writeStream)
+        internal override void Write(IEnumerable<FilePart> parts, Stream writeStream)
         {
             using (Stream s = parts.First().GetStream())
             {
@@ -90,9 +86,9 @@ namespace SharpCompress.Reader.Zip
             }
         }
 
-        internal override IEnumerable<ZipEntry> GetEntries(Stream stream, Common.Options options)
+        internal override IEnumerable<ZipEntry> GetEntries(Stream stream, Options options)
         {
-            foreach (var h in ZipHeaderFactory.ReadHeaderNonseekable(stream))
+            foreach (ZipHeader h in ZipHeaderFactory.ReadHeaderNonseekable(stream))
             {
                 if (h != null)
                 {

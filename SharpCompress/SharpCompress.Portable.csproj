@@ -44,17 +44,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Archive\AbstractArchive.cs" />
+    <Compile Include="Archive\ArchiveFactory.cs" />
     <Compile Include="Archive\IArchive.cs" />
+    <Compile Include="Archive\IArchiveEntry.cs" />
+    <Compile Include="Archive\IArchiveEntry.Extensions.cs" />
     <Compile Include="Archive\Rar\RarArchive.cs" />
     <Compile Include="Archive\Rar\RarArchive.Extensions.cs" />
     <Compile Include="Archive\Rar\RarArchiveEntry.cs" />
-    <Compile Include="Archive\Rar\RarArchiveEntry.Extensions.cs" />
     <Compile Include="Archive\Rar\RarArchiveEntryFactory.cs" />
     <Compile Include="Archive\Rar\RarArchiveVolume.cs" />
     <Compile Include="Archive\Rar\RarArchiveVolumeFactory.cs" />
     <Compile Include="Archive\Rar\SeekableStreamFilePart.cs" />
     <Compile Include="Archive\Rar\StreamRarArchiveVolume.cs" />
     <Compile Include="Archive\Zip\ZipArchive.cs" />
+    <Compile Include="Archive\Zip\ZipArchiveEntry.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Common\Entry.cs" />
     <Compile Include="Common\ExtractOptions.cs" />
@@ -89,6 +92,7 @@
     <Compile Include="Common\Zip\ZipEntry.cs" />
     <Compile Include="Common\Zip\ZipFilePart.cs" />
     <Compile Include="Common\Zip\ZipHeaderFactory.cs" />
+    <Compile Include="Common\Zip\ZipVolume.cs" />
     <Compile Include="Compressor\Deflate\Crc32.cs" />
     <Compile Include="Compressor\Deflate\CrcCalculatorStream.cs" />
     <Compile Include="Compressor\Deflate\DeflateManager.cs" />

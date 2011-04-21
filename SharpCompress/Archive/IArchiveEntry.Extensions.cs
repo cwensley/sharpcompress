@@ -4,7 +4,7 @@ using SharpCompress.Common;
 using SharpCompress.Common.Rar.Headers;
 #endif
 
-namespace SharpCompress.Archive.Rar
+namespace SharpCompress.Archive
 {
 
     public static class RarArchiveEntryExtensions
@@ -13,7 +13,7 @@ namespace SharpCompress.Archive.Rar
         /// <summary>
         /// Extract to specific directory, retaining filename
         /// </summary>
-        public static void WriteToDirectory(this RarArchiveEntry entry, string destinationDirectory,
+        public static void WriteToDirectory(this IArchiveEntry entry, string destinationDirectory,
             IExtractionListener listener,
             ExtractOptions options = ExtractOptions.Overwrite)
         {
@@ -43,7 +43,7 @@ namespace SharpCompress.Archive.Rar
         /// <summary>
         /// Extract to specific directory, retaining filename
         /// </summary>
-        public static void WriteToDirectory(this RarArchiveEntry entry, string destinationPath,
+        public static void WriteToDirectory(this IArchiveEntry entry, string destinationPath,
             ExtractOptions options = ExtractOptions.Overwrite)
         {
             entry.WriteToDirectory(destinationPath, new NullExtractionListener(), options);
@@ -52,7 +52,7 @@ namespace SharpCompress.Archive.Rar
         /// <summary>
         /// Extract to specific file
         /// </summary>
-        public static void WriteToFile(this RarArchiveEntry entry, string destinationFileName,
+        public static void WriteToFile(this IArchiveEntry entry, string destinationFileName,
                         IExtractionListener listener,
             ExtractOptions options = ExtractOptions.Overwrite)
         {
@@ -71,14 +71,14 @@ namespace SharpCompress.Archive.Rar
         /// <summary>
         /// Extract to specific file
         /// </summary>
-        public static void WriteToFile(this RarArchiveEntry entry, string destinationFileName,
+        public static void WriteToFile(this IArchiveEntry entry, string destinationFileName,
            ExtractOptions options = ExtractOptions.Overwrite)
         {
             entry.WriteToFile(destinationFileName, new NullExtractionListener(), options);
         }
 #endif
 
-        public static void WriteTo(this RarArchiveEntry entry, Stream stream)
+        public static void WriteTo(this IArchiveEntry entry, Stream stream)
         {
             entry.WriteTo(stream, new NullExtractionListener());
         }

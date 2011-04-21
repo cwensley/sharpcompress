@@ -6,12 +6,12 @@ using SharpCompress.Common;
 
 namespace SharpCompress.Archive
 {
-    public abstract class AbstractArchive<TEntry, TVolume>
-        where TEntry : Entry
-        where TVolume : Volume
+    public abstract class AbstractArchive<TEntry, TVolume> : IArchive
+        where TEntry : IArchiveEntry
+        where TVolume : IVolume
     {
-        private LazyReadOnlyCollection<TVolume> lazyVolumes;
-        private LazyReadOnlyCollection<TEntry> lazyEntries;
+        private readonly LazyReadOnlyCollection<TVolume> lazyVolumes;
+        private readonly LazyReadOnlyCollection<TEntry> lazyEntries;
 
 
 #if !PORTABLE
@@ -28,6 +28,7 @@ namespace SharpCompress.Archive
             }
 
             lazyVolumes = new LazyReadOnlyCollection<TVolume>(LoadVolumes(fileInfo, options));
+
             lazyEntries = new LazyReadOnlyCollection<TEntry>(LoadEntries(Volumes));
         }
 
@@ -52,10 +53,7 @@ namespace SharpCompress.Archive
         /// <returns></returns>
         public ICollection<TEntry> Entries
         {
-            get
-            {
-                return lazyEntries;
-            }
+            get { return lazyEntries; }
         }
 
         /// <summary>
@@ -64,10 +62,7 @@ namespace SharpCompress.Archive
         /// <returns></returns>
         public ICollection<TVolume> Volumes
         {
-            get
-            {
-                return lazyVolumes;
-            }
+            get { return lazyVolumes; }
         }
 
         /// <summary>
@@ -75,13 +70,20 @@ namespace SharpCompress.Archive
         /// </summary>
         public long TotalSize
         {
-            get
-            {
-                return Entries.Aggregate(0L, (total, cf) => total + cf.CompressedSize);
-            }
+            get { return Entries.Aggregate(0L, (total, cf) => total + cf.CompressedSize); }
         }
 
         protected abstract IEnumerable<TVolume> LoadVolumes(IEnumerable<Stream> streams, Options options);
         protected abstract IEnumerable<TEntry> LoadEntries(IEnumerable<TVolume> volumes);
+
+        IEnumerable<IArchiveEntry> IArchive.Entries
+        {
+            get { return lazyEntries.Cast<IArchiveEntry>(); }
+        }
+
+        IEnumerable<IVolume> IArchive.Volumes
+        {
+            get { return lazyVolumes.Cast<IVolume>(); }
+        }
     }
 }

@@ -90,6 +90,7 @@ namespace SharpCompress.Archive.Rar
             return new RarArchive(fileInfo, options);
         }
 #endif
+
         /// <summary>
         /// Takes a seekable Stream as a source
         /// </summary>
@@ -135,7 +136,7 @@ namespace SharpCompress.Archive.Rar
 #if !PORTABLE
         public static void ExtractToDirectory(string sourceArchive, string destinationDirectoryName)
         {
-            RarArchive archive = RarArchive.Open(sourceArchive);
+            RarArchive archive = Open(sourceArchive);
             foreach (RarArchiveEntry entry in archive.Entries)
             {
                 string path = Path.Combine(destinationDirectoryName, Path.GetFileName(entry.FilePath));
@@ -163,24 +164,25 @@ namespace SharpCompress.Archive.Rar
             }
         }
 #endif
+
         public static bool IsRarFile(Stream stream)
         {
             try
             {
-
-                RarHeaderFactory headerFactory = new RarHeaderFactory(StreamingMode.Seekable, Options.CheckForSFX);
+                var headerFactory = new RarHeaderFactory(StreamingMode.Seekable, Options.CheckForSFX);
                 RarHeader header = headerFactory.ReadHeaders(stream).FirstOrDefault();
                 if (header == null)
                 {
                     return false;
                 }
-                return Enum.IsDefined(typeof(HeaderType), header.HeaderType);
+                return Enum.IsDefined(typeof (HeaderType), header.HeaderType);
             }
             catch
             {
                 return false;
             }
         }
+
         #endregion
     }
 }

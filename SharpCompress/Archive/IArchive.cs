@@ -5,7 +5,7 @@ namespace SharpCompress.Archive
 {
     public interface IArchive
     {
-        ICollection<IEntry> Entries
+        IEnumerable<IArchiveEntry> Entries
         {
             get;
         }
@@ -13,7 +13,7 @@ namespace SharpCompress.Archive
         {
             get;
         }
-        ICollection<IVolume> Volumes
+        IEnumerable<IVolume> Volumes
         {
             get;
         }

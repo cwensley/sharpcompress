@@ -8,7 +8,7 @@ using SharpCompress.Compressor.Rar;
 
 namespace SharpCompress.Archive.Rar
 {
-    public class RarArchiveEntry : RarEntry
+    public class RarArchiveEntry : RarEntry, IArchiveEntry
     {
         private readonly ICollection<RarFilePart> parts;
 

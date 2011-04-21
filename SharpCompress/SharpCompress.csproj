@@ -85,11 +85,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Archive\AbstractArchive.cs" />
+    <Compile Include="Archive\ArchiveFactory.cs" />
+    <Compile Include="Archive\IArchiveEntry.cs" />
     <Compile Include="Archive\Rar\RarArchiveEntryFactory.cs" />
     <Compile Include="Archive\IArchive.cs" />
     <Compile Include="Archive\Rar\RarArchiveVolume.cs" />
     <Compile Include="Archive\Rar\StreamRarArchiveVolume.cs" />
     <Compile Include="Archive\Zip\ZipArchive.cs" />
+    <Compile Include="Archive\Zip\ZipArchiveEntry.cs" />
     <Compile Include="Common\ExtractOptions.cs" />
     <Compile Include="Common\FilePart.cs" />
     <Compile Include="Common\Entry.cs" />
@@ -127,7 +130,7 @@
     <Compile Include="LazyReadOnlyCollection.cs" />
     <Compile Include="NullExtractionListener.cs" />
     <Compile Include="Archive\Rar\RarArchive.Extensions.cs" />
-    <Compile Include="Archive\Rar\RarArchiveEntry.Extensions.cs" />
+    <Compile Include="Archive\IArchiveEntry.Extensions.cs" />
     <Compile Include="Archive\Rar\RarArchiveEntry.cs" />
     <Compile Include="Exceptions\RarExtractionException.cs" />
     <Compile Include="Common\Rar\RarEntry.cs" />
@@ -140,6 +143,7 @@
     <Compile Include="Archive\Rar\SeekableStreamFilePart.cs" />
     <Compile Include="Reader\Rar\SingleVolumeRarReader.cs" />
     <Compile Include="Common\ReaderType.cs" />
+    <Compile Include="ReadOnlyCollection.cs" />
     <Compile Include="VersionInfo.cs" />
     <Compile Include="Archive\Rar\FileInfoRarFilePart.cs" />
     <Compile Include="Archive\Rar\FileInfoRarArchiveVolume.cs" />
