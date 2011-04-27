@@ -71,12 +71,12 @@ namespace SharpCompress.Common.Rar.Headers
                             }
                             else
                             {
-                                FileName = Encoding.UTF8.GetString(fileNameBytes, 0, fileNameBytes.Length);
+                                FileName = DecodeDefault(fileNameBytes);
                             }
                         }
                         else
                         {
-                            FileName = Encoding.UTF8.GetString(fileNameBytes, 0, fileNameBytes.Length);
+                            FileName = DecodeDefault(fileNameBytes);
                         }
                         FileName = ConvertPath(FileName, HostOS);
                     }
@@ -114,6 +114,16 @@ namespace SharpCompress.Common.Rar.Headers
                 FileLastAccessedTime = ProcessExtendedTime(extendedFlags, null, reader, 2);
                 FileArchivedTime = ProcessExtendedTime(extendedFlags, null, reader, 3);
             }
+        }
+
+        //only the full .net framework will do other code pages than unicode/utf8
+        private string DecodeDefault(byte[] bytes)
+        {
+#if SILVERLIGHT || PORTABLE
+            return Encoding.Unicode.GetString(bytes, 0, bytes.Length);
+#else
+            return Encoding.Default.GetString(bytes, 0, bytes.Length);
+#endif
         }
 
         private long UInt32To64(uint x, uint y)
