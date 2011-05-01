@@ -150,6 +150,7 @@
     <Compile Include="Archive\Rar\SeekableStreamFilePart.cs" />
     <Compile Include="Reader\Rar\SingleVolumeRarReader.cs" />
     <Compile Include="Common\ReaderType.cs" />
+    <Compile Include="Reader\Tar\TarGZipReader.cs" />
     <Compile Include="Reader\Tar\TarReader.cs" />
     <Compile Include="ReadOnlyCollection.cs" />
     <Compile Include="VersionInfo.cs" />

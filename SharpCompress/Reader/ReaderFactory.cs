@@ -41,8 +41,7 @@ namespace SharpCompress.Reader
                 if (TarReader.IsTarFile(testStream))
                 {
                     rewindableStream.Rewind();
-                    return TarReader.Open(
-                        new GZipStream(rewindableStream, CompressionMode.Decompress), listener, options);
+                    return TarGZipReader.Open(rewindableStream, listener, options);
                 }
             }
             rewindableStream.Rewind();
