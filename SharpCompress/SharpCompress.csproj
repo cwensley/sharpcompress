@@ -98,9 +98,15 @@
     <Compile Include="Common\Entry.cs" />
     <Compile Include="Common\IEntry.cs" />
     <Compile Include="Common\IVolume.cs" />
+    <Compile Include="Common\Tar\Headers\TarHeader.cs" />
+    <Compile Include="Common\Tar\TarVolume.cs" />
+    <Compile Include="Common\Tar\TarEntry.cs" />
+    <Compile Include="Common\Tar\TarFilePart.cs" />
+    <Compile Include="Common\Tar\TarHeaderFactory.cs" />
     <Compile Include="Common\Zip\ZipVolume.cs" />
     <Compile Include="Compressor\Deflate\CrcCalculatorStream.cs" />
     <Compile Include="Compressor\Deflate\FlushType.cs" />
+    <Compile Include="Exceptions\TarException.cs" />
     <Compile Include="IO\RewindableStream.cs" />
     <Compile Include="Reader\ReaderFactory.cs" />
     <Compile Include="Reader\AbstractReader.cs" />
@@ -143,6 +149,7 @@
     <Compile Include="Archive\Rar\SeekableStreamFilePart.cs" />
     <Compile Include="Reader\Rar\SingleVolumeRarReader.cs" />
     <Compile Include="Common\ReaderType.cs" />
+    <Compile Include="Reader\Tar\TarReader.cs" />
     <Compile Include="ReadOnlyCollection.cs" />
     <Compile Include="VersionInfo.cs" />
     <Compile Include="Archive\Rar\FileInfoRarFilePart.cs" />

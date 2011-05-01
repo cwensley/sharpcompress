@@ -3,8 +3,10 @@ using System.IO;
 using SharpCompress.Archive.Rar;
 using SharpCompress.Archive.Zip;
 using SharpCompress.Common;
+using SharpCompress.Compressor.Deflate;
 using SharpCompress.IO;
 using SharpCompress.Reader.Rar;
+using SharpCompress.Reader.Tar;
 using SharpCompress.Reader.Zip;
 
 namespace SharpCompress.Reader
@@ -28,6 +30,20 @@ namespace SharpCompress.Reader
             if (ZipArchive.IsZipFile(rewindableStream))
             {
                 return ZipReader.Open(rewindableStream, listener, options);
+            }
+            rewindableStream.Rewind();
+            rewindableStream.Recording = true;
+            if (Utility.IsGZip(rewindableStream))
+            {
+                rewindableStream.Rewind();
+                GZipStream testStream = new GZipStream(rewindableStream, CompressionMode.Decompress);
+                rewindableStream.Recording = true;
+                if (TarReader.IsTarFile(testStream))
+                {
+                    rewindableStream.Rewind();
+                    return TarReader.Open(
+                        new GZipStream(rewindableStream, CompressionMode.Decompress), listener, options);
+                }
             }
             rewindableStream.Rewind();
             rewindableStream.Recording = true;

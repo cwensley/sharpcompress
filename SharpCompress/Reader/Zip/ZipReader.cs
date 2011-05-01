@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using SharpCompress.Common;
 using SharpCompress.Common.Zip;
 using SharpCompress.Common.Zip.Headers;
@@ -56,35 +55,6 @@ namespace SharpCompress.Reader.Zip
         }
 
         #endregion
-
-        internal override IEnumerable<FilePart> CreateFilePartEnumerableForCurrentEntry()
-        {
-            return base.Entry.Parts;
-        }
-
-        internal override Stream RequestInitialStream()
-        {
-            return Volume.Stream;
-        }
-
-        internal override void Skip(IEnumerable<FilePart> parts)
-        {
-            var buffer = new byte[4096];
-            using (Stream s = parts.First().GetStream())
-            {
-                while (s.Read(buffer, 0, buffer.Length) > 0)
-                {
-                }
-            }
-        }
-
-        internal override void Write(IEnumerable<FilePart> parts, Stream writeStream)
-        {
-            using (Stream s = parts.First().GetStream())
-            {
-                s.TransferTo(writeStream);
-            }
-        }
 
         internal override IEnumerable<ZipEntry> GetEntries(Stream stream, Options options)
         {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using SharpCompress.Common;
 #if THREEFIVE || PORTABLE
 using SharpCompress.Common.Rar.Headers;
@@ -121,8 +122,16 @@ namespace SharpCompress.Reader
             return true;
         }
 
-        internal abstract IEnumerable<FilePart> CreateFilePartEnumerableForCurrentEntry();
-        internal abstract Stream RequestInitialStream();
+
+        internal virtual IEnumerable<FilePart> CreateFilePartEnumerableForCurrentEntry()
+        {
+            return Entry.Parts;
+        }
+
+        internal virtual Stream RequestInitialStream()
+        {
+            return Volume.Stream;
+        }
 
         internal virtual bool NextEntryForCurrentStream()
         {
@@ -142,7 +151,17 @@ namespace SharpCompress.Reader
             }
         }
 
-        internal abstract void Skip(IEnumerable<FilePart> parts);
+        internal virtual void Skip(IEnumerable<FilePart> parts)
+        {
+            var buffer = new byte[4096];
+            using (Stream s = parts.First().GetStream())
+            {
+                while (s.Read(buffer, 0, buffer.Length) > 0)
+                {
+                }
+            }
+        }
+
 
         /// <summary>
         /// Decompresses the current entry to the stream.  This cannot be called twice for the current entry.
@@ -160,7 +179,13 @@ namespace SharpCompress.Reader
             wroteCurrentEntry = true;
         }
 
-        internal abstract void Write(IEnumerable<FilePart> parts, Stream writeStream);
+        internal virtual void Write(IEnumerable<FilePart> parts, Stream writeStream)
+        {
+            using (Stream s = parts.First().GetStream())
+            {
+                s.TransferTo(writeStream);
+            }
+        }
 
         #endregion
 
