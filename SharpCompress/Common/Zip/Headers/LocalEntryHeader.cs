@@ -1,13 +1,10 @@
 ﻿using System.IO;
-using System.Text;
 using SharpCompress.IO;
 
 namespace SharpCompress.Common.Zip.Headers
 {
     internal class LocalEntryHeader : ZipHeader
     {
-        private readonly static Encoding DefaultEncoding = Encoding.GetEncoding("IBM437");
-
         public LocalEntryHeader()
             : base(ZipHeaderType.LocalEntry)
         {
@@ -28,6 +25,28 @@ namespace SharpCompress.Common.Zip.Headers
             byte[] name = reader.ReadBytes(nameLength);
             Extra = reader.ReadBytes(extraLength);
             Name = DefaultEncoding.GetString(name, 0, name.Length);
+        }
+
+        internal override void Write(BinaryWriter writer)
+        {
+            writer.Write(Version);
+            writer.Write(Flags);
+            writer.Write(CompressionMethod);
+            writer.Write(LastModifiedTime);
+            writer.Write(LastModifiedDate);
+            writer.Write(Crc);
+            writer.Write(CompressedSize);
+            writer.Write(UncompressedSize);
+
+            byte[] nameBytes = DefaultEncoding.GetBytes(Name);
+
+            writer.Write((ushort)nameBytes.Length);
+            writer.Write(Extra == null ? (ushort)0 : (ushort)Extra.Length);
+            if (Extra != null)
+            {
+                writer.Write(Extra);
+            }
+            writer.Write(nameBytes);
         }
 
         internal ushort Version { get; private set; }

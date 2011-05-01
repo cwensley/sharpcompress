@@ -1,4 +1,5 @@
-﻿using SharpCompress.IO;
+﻿using System.IO;
+using SharpCompress.IO;
 
 namespace SharpCompress.Common.Zip.Headers
 {
@@ -19,6 +20,18 @@ namespace SharpCompress.Common.Zip.Headers
             DirectoryStartOffsetRelativeToDisk = reader.ReadUInt32();
             CommentLength = reader.ReadUInt16();
             Comment = reader.ReadBytes(CommentLength);
+        }
+
+        internal override void Write(BinaryWriter writer)
+        {
+            writer.Write(VolumeNumber);
+            writer.Write(FirstVolumeWithDirectory);
+            writer.Write(TotalNumberOfEntriesInDisk);
+            writer.Write(TotalNumberOfEntries);
+            writer.Write(DirectorySize);
+            writer.Write(DirectoryStartOffsetRelativeToDisk);
+            writer.Write(CommentLength);
+            writer.Write(Comment);
         }
 
         public ushort VolumeNumber { get; private set; }
