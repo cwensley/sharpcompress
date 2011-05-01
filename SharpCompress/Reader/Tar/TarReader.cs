@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using SharpCompress.Common;
 using SharpCompress.Common.Tar;
 using SharpCompress.Common.Tar.Headers;
@@ -66,12 +65,6 @@ namespace SharpCompress.Reader.Tar
                     yield return new TarEntry(new TarFilePart(h));
                 }
             }
-        }
-
-        internal override void Write(IEnumerable<FilePart> parts, Stream writeStream)
-        {
-            Stream s = parts.First().GetStream(); //tars are always reading from a single stream
-            s.TransferTo(writeStream);
         }
 
         internal static bool IsTarFile(Stream stream)

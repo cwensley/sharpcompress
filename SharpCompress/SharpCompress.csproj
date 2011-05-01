@@ -99,6 +99,7 @@
     <Compile Include="Common\IEntry.cs" />
     <Compile Include="Common\IVolume.cs" />
     <Compile Include="Common\Tar\Headers\TarHeader.cs" />
+    <Compile Include="Common\Tar\TarReadOnlySubStream.cs" />
     <Compile Include="Common\Tar\TarVolume.cs" />
     <Compile Include="Common\Tar\TarEntry.cs" />
     <Compile Include="Common\Tar\TarFilePart.cs" />

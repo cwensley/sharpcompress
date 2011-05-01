@@ -28,7 +28,7 @@ namespace SharpCompress.Common.Tar
                     {
                         yield break;
                     }
-                    header.PackedStream = new ReadOnlySubStream(stream, header.Size, true);
+                    header.PackedStream = new TarReadOnlySubStream(stream, header.Size);
                 }
                 catch
                 {

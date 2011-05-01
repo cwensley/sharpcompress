@@ -400,5 +400,10 @@ namespace SharpCompress
             }
             return (total >= buffer.Length);
         }
+
+        public static string TrimNulls(this string source)
+        {
+            return source.Replace('\0', ' ').Trim();
+        }
     }
 }

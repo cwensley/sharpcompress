@@ -7,13 +7,11 @@ namespace SharpCompress.Common.Tar
 {
     public class TarEntry : Entry
     {
-        private readonly bool directory;
         private readonly TarFilePart filePart;
 
         internal TarEntry(TarFilePart filePart)
         {
             this.filePart = filePart;
-            directory = filePart.Header.Name.EndsWith("/");
         }
 
         public override uint Crc
@@ -63,7 +61,7 @@ namespace SharpCompress.Common.Tar
 
         public override bool IsDirectory
         {
-            get { return directory; }
+            get { return filePart.Header.FileType == 5; }
         }
 
         public override bool IsSplit
