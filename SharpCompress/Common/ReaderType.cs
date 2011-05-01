@@ -7,5 +7,6 @@ namespace SharpCompress.Common
         Zip,
         Tar,
         TarGZip,
+        GZip,
     }
 }

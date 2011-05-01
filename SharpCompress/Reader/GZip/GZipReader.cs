@@ -22,7 +22,7 @@ namespace SharpCompress.Reader.GZip
 
         public override ReaderType ReaderType
         {
-            get { return ReaderType.Tar; }
+            get { return ReaderType.GZip; }
         }
 
         #region Open
