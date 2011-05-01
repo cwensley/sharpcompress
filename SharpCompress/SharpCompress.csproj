@@ -93,6 +93,9 @@
     <Compile Include="Archive\Rar\StreamRarArchiveVolume.cs" />
     <Compile Include="Archive\Zip\ZipArchive.cs" />
     <Compile Include="Archive\Zip\ZipArchiveEntry.cs" />
+    <Compile Include="Common\GZip\GZipEntry.cs" />
+    <Compile Include="Common\GZip\GZipFilePart.cs" />
+    <Compile Include="Common\GZip\GZipVolume.cs" />
     <Compile Include="Common\ExtractOptions.cs" />
     <Compile Include="Common\FilePart.cs" />
     <Compile Include="Common\Entry.cs" />
@@ -109,6 +112,7 @@
     <Compile Include="Compressor\Deflate\FlushType.cs" />
     <Compile Include="Exceptions\TarException.cs" />
     <Compile Include="IO\RewindableStream.cs" />
+    <Compile Include="Reader\GZip\GZipReader.cs" />
     <Compile Include="Reader\ReaderFactory.cs" />
     <Compile Include="Reader\AbstractReader.cs" />
     <Compile Include="Common\Volume.cs" />

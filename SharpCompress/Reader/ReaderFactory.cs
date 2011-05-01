@@ -5,6 +5,7 @@ using SharpCompress.Archive.Zip;
 using SharpCompress.Common;
 using SharpCompress.Compressor.Deflate;
 using SharpCompress.IO;
+using SharpCompress.Reader.GZip;
 using SharpCompress.Reader.Rar;
 using SharpCompress.Reader.Tar;
 using SharpCompress.Reader.Zip;
@@ -33,7 +34,7 @@ namespace SharpCompress.Reader
             }
             rewindableStream.Rewind();
             rewindableStream.Recording = true;
-            if (Utility.IsGZip(rewindableStream))
+            if (GZipReader.IsGZip(rewindableStream))
             {
                 rewindableStream.Rewind();
                 GZipStream testStream = new GZipStream(rewindableStream, CompressionMode.Decompress);
@@ -43,6 +44,8 @@ namespace SharpCompress.Reader
                     rewindableStream.Rewind();
                     return TarGZipReader.Open(rewindableStream, listener, options);
                 }
+                rewindableStream.Rewind();
+                return GZipReader.Open(rewindableStream, listener, options);
             }
             rewindableStream.Rewind();
             rewindableStream.Recording = true;

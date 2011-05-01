@@ -2,7 +2,6 @@
 using System.IO;
 using SharpCompress.Common;
 using SharpCompress.Common.Tar;
-using SharpCompress.Common.Tar.Headers;
 using SharpCompress.Compressor.Deflate;
 
 namespace SharpCompress.Reader.Tar
@@ -59,13 +58,7 @@ namespace SharpCompress.Reader.Tar
 
         internal override IEnumerable<TarEntry> GetEntries(Stream stream, Options options)
         {
-            foreach (TarHeader h in TarHeaderFactory.ReadHeaderNonseekable(stream))
-            {
-                if (h != null)
-                {
-                    yield return new TarEntry(new TarFilePart(h));
-                }
-            }
+            return TarEntry.GetEntries(stream);
         }
     }
 }

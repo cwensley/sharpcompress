@@ -58,13 +58,7 @@ namespace SharpCompress.Reader.Tar
 
         internal override IEnumerable<TarEntry> GetEntries(Stream stream, Options options)
         {
-            foreach (TarHeader h in TarHeaderFactory.ReadHeaderNonseekable(stream))
-            {
-                if (h != null)
-                {
-                    yield return new TarEntry(new TarFilePart(h));
-                }
-            }
+            return TarEntry.GetEntries(stream);
         }
 
         internal static bool IsTarFile(Stream stream)
