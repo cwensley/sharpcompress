@@ -16,6 +16,7 @@ namespace SharpCompress.Test
         static void Main()
         {
             new RewindableStreamTest().Test();
+            TestGenericTar();
             TestGenericTgz();
         }
 
@@ -38,7 +39,7 @@ namespace SharpCompress.Test
 
         public static void TestGenericTgz()
         {
-            using (Stream stream = File.OpenRead(@"C:\Code\AutoIndex-2.2.0.tar.gz"))
+            using (Stream stream = File.OpenRead(@"C:\Code\sharpcompress\TestArchives\sharpcompress.tar.gz"))
             {
                 var reader = ReaderFactory.OpenReader(stream);
                 while (reader.MoveToNextEntry())
@@ -53,6 +54,23 @@ namespace SharpCompress.Test
             }
         }
 
+
+        public static void TestGenericTar()
+        {
+            using (Stream stream = File.OpenRead(@"C:\Code\sharpcompress\TestArchives\sharpcompress.tar"))
+            {
+                var reader = ReaderFactory.OpenReader(stream);
+                while (reader.MoveToNextEntry())
+                {
+                    if (!reader.Entry.IsDirectory)
+                    {
+                        Console.WriteLine(reader.Entry.FilePath);
+                        reader.WriteEntryToDirectory(@"C:\temp",
+                                                     ExtractOptions.ExtractFullPath | ExtractOptions.Overwrite);
+                    }
+                }
+            }
+        }
 
 
         public static void TestRar()

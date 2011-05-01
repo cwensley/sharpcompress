@@ -42,10 +42,10 @@ namespace SharpCompress.Common.Tar.Headers
             {
                 return false;
             }
-            Mode = ReadASCIIInt32(buffer, 100, 7);
-            UserId = ReadASCIIInt32(buffer, 108, 7);
-            GroupId = ReadASCIIInt32(buffer, 116, 7);
-            FileType = ReadASCIIInt32(buffer, 156, 1);
+            Mode = ReadASCIIInt32Base8(buffer, 100, 7);
+            UserId = ReadASCIIInt32Base8(buffer, 108, 7);
+            GroupId = ReadASCIIInt32Base8(buffer, 116, 7);
+            FileType = ReadASCIIInt32Base8(buffer, 156, 1);
             if (FileType != 5)
             {
                 if ((buffer[124] & 0x80) == 0x80) // if size in binary
@@ -55,10 +55,10 @@ namespace SharpCompress.Common.Tar.Headers
                 }
                 else
                 {
-                    Size = ReadASCIIInt64(buffer, 124, 11);
+                    Size = ReadASCIIInt64Base8(buffer, 124, 11);
                 }
             }
-            long unixTimeStamp = Convert.ToInt64(Encoding.ASCII.GetString(buffer, 136, 11));
+            long unixTimeStamp = ReadASCIIInt64(buffer, 136, 11);
             LastModifiedTime = Epoch.AddSeconds(unixTimeStamp);
 
             //int storedChecksum = Convert.ToInt32(Encoding.ASCII.GetString(buffer, 148, 6).Trim());
@@ -73,7 +73,7 @@ namespace SharpCompress.Common.Tar.Headers
             //}
 
 
-            FileType = ReadASCIIInt32(buffer, 156, 1);
+            FileType = ReadASCIIInt32Base8(buffer, 156, 1);
 
             UserName = Encoding.ASCII.GetString(buffer, 0x109, 32).TrimNulls();
             GroupName = Encoding.ASCII.GetString(buffer, 0x129, 32).TrimNulls();
@@ -81,7 +81,7 @@ namespace SharpCompress.Common.Tar.Headers
             return true;
         }
 
-        private static int ReadASCIIInt32(byte[] buffer, int offset, int count)
+        private static int ReadASCIIInt32Base8(byte[] buffer, int offset, int count)
         {
             string s = Encoding.ASCII.GetString(buffer, offset, count).TrimNulls();
             if (string.IsNullOrEmpty(s))
@@ -91,7 +91,7 @@ namespace SharpCompress.Common.Tar.Headers
             return Convert.ToInt32(s, 8);
         }
 
-        private static long ReadASCIIInt64(byte[] buffer, int offset, int count)
+        private static long ReadASCIIInt64Base8(byte[] buffer, int offset, int count)
         {
             string s = Encoding.ASCII.GetString(buffer, offset, count).TrimNulls();
             if (string.IsNullOrEmpty(s))
@@ -99,6 +99,16 @@ namespace SharpCompress.Common.Tar.Headers
                 return 0;
             }
             return Convert.ToInt64(s, 8);
+        }
+
+        private static long ReadASCIIInt64(byte[] buffer, int offset, int count)
+        {
+            string s = Encoding.ASCII.GetString(buffer, offset, count).TrimNulls();
+            if (string.IsNullOrEmpty(s))
+            {
+                return 0;
+            }
+            return Convert.ToInt64(s);
         }
 
         internal static int RecalculateChecksum(byte[] buf)

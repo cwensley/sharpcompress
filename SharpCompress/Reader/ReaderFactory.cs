@@ -47,6 +47,13 @@ namespace SharpCompress.Reader
             }
             rewindableStream.Rewind();
             rewindableStream.Recording = true;
+            if (TarReader.IsTarFile(rewindableStream))
+            {
+                rewindableStream.Rewind();
+                return TarReader.Open(rewindableStream, listener, options);
+            }
+            rewindableStream.Rewind();
+            rewindableStream.Recording = true;
             if (RarArchive.IsRarFile(rewindableStream))
             {
                 rewindableStream.Rewind();

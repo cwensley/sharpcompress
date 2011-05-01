@@ -17,7 +17,10 @@ namespace SharpCompress.IO
             if (disposing)
             {
                 int skipBytes = amountRead % 512;
-
+                if (skipBytes == 0)
+                {
+                    return;
+                }
                 skipBytes = 512 - skipBytes;
                 if (skipBytes == 0)
                 {
